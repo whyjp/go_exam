@@ -2,6 +2,7 @@ package main
 
 import (
 	"archive/zip"
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -71,8 +72,18 @@ func zipit(source, target string) error {
 	return err
 }
 func main() {
+
+	pathOnDats := flag.String("path", "", "압축할 폴더나 파일")
+	filepattern := flag.String("filepattern", "", "YYYY-MM-DD-파일명.zip")
+	flag.Parse()
+	if flag.NFlag() == 0 {
+		flag.Usage()
+		return
+	}
+
 	now := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
 	fmt.Println(now)
-
-	zipit(now, now+"zipfileformat.zip")
+	fmt.Printf("%s", *pathOnDats)
+	fmt.Printf("%s", *filepattern)
+	zipit(*pathOnDats+now, now+*filepattern)
 }
