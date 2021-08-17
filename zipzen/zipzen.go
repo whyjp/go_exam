@@ -117,8 +117,8 @@ func main() {
 		logger.Println("exit program!")
 		return
 	}
-	if _, err := os.Stat(to); os.IsNotExist(err) {
-		logger.Printf("dest path : %s is not exist.\n", from)
+	if _, err := os.Stat(*path_dest); os.IsNotExist(err) {
+		logger.Printf("dest path : %s is not exist.\n", *path_dest)
 		logger.Println("exit program!")
 		return
 	}
