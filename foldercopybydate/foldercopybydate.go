@@ -106,6 +106,18 @@ func main() {
 	logger.Printf("copy source folder [%s] \n", from)
 	logger.Printf("to [%s] \n", to)
 
+	//check it
+	if _, err := os.Stat(from); os.IsNotExist(err) {
+		logger.Printf("source path : %s is not exist.\n", from)
+		logger.Println("exit program!")
+		return
+	}
+	if _, err := os.Stat(to); os.IsNotExist(err) {
+		logger.Printf("dest path : %s is not exist.\n", from)
+		logger.Println("exit program!")
+		return
+	}
+
 	err := CopyDir(from, to)
 
 	if err == nil {

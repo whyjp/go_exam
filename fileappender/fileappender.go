@@ -62,7 +62,7 @@ func fileAppender(source, target string) error {
 			if _, err := os.Stat(pairFileName); os.IsNotExist(err) {
 				logger.Printf("pairFile path : %s is not exist.\n", pairFileName)
 				logger.Println("exit program!")
-				return
+				return nil
 			}
 
 			logger.Printf("pairFile: %s \n", pairFileName)
@@ -134,7 +134,16 @@ func main() {
 	now := time.Now().AddDate(*offsetYear, *offsetMon, *offsetDay).Format("2006-01-02")
 	logger.Println(now)
 
-	err := fileAppender(*path_source+"/"+now, *suffix)
+	from := *path_source + "/" + now + "/"
+	logger.Printf("source path : %s\n", from)
+
+	if _, err := os.Stat(from); os.IsNotExist(err) {
+		logger.Printf("source path : %s is not exist.\n", from)
+		logger.Println("exit program!")
+		return
+	}
+
+	err := fileAppender(from, *suffix)
 	if err == nil {
 	} else {
 		panic(err)
