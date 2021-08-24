@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -28,7 +29,7 @@ func zipit(source, target string) error {
 	var baseDir string
 	sourceAbs, err := filepath.Abs(source)
 	if info.IsDir() {
-		baseDir = filepath.Base(source)
+		//baseDir = filepath.Base(source)
 	}
 
 	logger.Printf("achive here : %s\n", source)
@@ -53,7 +54,7 @@ func zipit(source, target string) error {
 			return err
 		}
 		if baseDir != "" {
-			//header.Name = filepath.Join(baseDir, strings.TrimPrefix(path, source))
+			header.Name = filepath.Join(baseDir, strings.TrimPrefix(path, source))
 		}
 
 		if info.IsDir() {
