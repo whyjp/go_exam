@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"flag"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -24,6 +25,7 @@ func fileAppender(source, target string) error {
 			return err
 		}
 	}
+	logger.Printf("baseDir: %s \n", baseDir)
 
 	filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -33,73 +35,63 @@ func fileAppender(source, target string) error {
 		currentname := filepath.Join(baseDir, info.Name())
 
 		if info.IsDir() == false && strings.HasSuffix(currentname, target) == false {
-			log.Printf("baseDir: %s \n", baseDir)
-			log.Printf("path: %s \n", path)
-			log.Printf("filename: %s : size: %d\n", currentname, info.Size())
+			logger.Printf("path: %s \n", path)
+			logger.Printf("rolledfile name is : %s : size : %d\n", currentname, info.Size())
 
-			//file, err := os.OpenFile(currentname, os.O_RDONLY|os.O_RDWR|os.O_TRUNC, 0644)
-			file, err := os.Open(currentname)
-
-			if err != nil {
-				panic(err)
-			}
-			defer file.Close()
-
-			buf := make([]byte, info.Size())
-			n := 0
-			n, err = file.Read(buf)
-			if err != nil {
-				panic(err)
-			}
-
-			logger.Printf("read file length : %d \n", n)
-			//logger.Printf("%s", buf)
-
-			removeindex := strings.LastIndex(currentname, target) + 4
-			logger.Printf("find %s from %s - removefrom :%d\n", target, currentname, removeindex)
-			pairFileName := currentname[:removeindex]
-
-			if _, err := os.Stat(pairFileName); os.IsNotExist(err) {
-				logger.Printf("pairFile path : %s is not exist.\n", pairFileName)
-				logger.Println("exit program!")
-				return nil
-			}
-
-			logger.Printf("pairFile: %s \n", pairFileName)
-			pairFile, err := os.OpenFile(pairFileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+			rolledFileName := currentname
+			rolledFP, err := os.OpenFile(rolledFileName, os.O_APPEND|os.O_WRONLY, 0600)
 
 			if err != nil {
 				panic(err)
 			}
-			defer pairFile.Close()
+			defer rolledFP.Close()
 
-			bufWriter := bufio.NewWriter(pairFile)
-
-			currentPos, err := pairFile.Seek(0, 2)
-
+			currentPos, err := rolledFP.Seek(0, 2)
 			if err != nil {
 				logger.Panicln("unable to seek to the end of")
 				os.Exit(3)
 			}
 			logger.Printf("currnetseekpos: %d \n", currentPos)
+			bufWriter := bufio.NewWriter(rolledFP)
 
-			//cnt, err := pairFile.Write(buf)
-			cnt, err := bufWriter.Write(buf)
+			removeindex := strings.LastIndex(rolledFileName, target) + len(target)
+			logFileName := rolledFileName[:removeindex]
 
-			logger.Printf("write size: %d \n", cnt)
+			if _, err := os.Stat(logFileName); os.IsNotExist(err) {
+				logger.Printf("log file path : %s is not exist.\n", logFileName)
+				logger.Println("exit program!")
+				return nil
+			}
+
+			logger.Printf("log fileName is : %s \n", logFileName)
+
+			logFP, err := os.OpenFile(logFileName, os.O_RDONLY|os.O_RDWR, 0644)
 
 			if err != nil {
 				panic(err)
 			}
-			bufWriter.Flush()
+			defer logFP.Close()
 
+			bufReader := bufio.NewReader(logFP)
+
+			logger.Printf("log file [%s] append to rolled file [%s]'s end \n", logFileName, rolledFileName)
+			written, err := io.Copy(bufWriter, bufReader)
+
+			logger.Printf("write size: %d \n", written)
 			if err != nil {
 				panic(err)
 			}
 
-			file.Close()
+			logFP.Close()
+			logger.Printf("remove log file [%s]\n", logFileName)
+			err = os.Remove(logFileName)
 
-			err = os.Remove(currentname)
+			if err != nil {
+				panic(err)
+			}
+			rolledFP.Close()
+			logger.Printf("rolled filename [%s] is renamed log filename [%s] \n", rolledFileName, logFileName)
+			err = os.Rename(rolledFileName, logFileName)
 
 			if err != nil {
 				panic(err)
@@ -116,7 +108,13 @@ var logger *log.Logger
 
 func main() {
 	//initlogger
-	logger = log.New(os.Stdout, "fileAppender,: ", log.LstdFlags)
+	fpLog, err := os.OpenFile("fileAppender.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		panic(err)
+	}
+	defer fpLog.Close()
+	multiWriter := io.MultiWriter(fpLog, os.Stdout)
+	logger = log.New(multiWriter, "fileAppender: ", log.LstdFlags)
 
 	path_source := flag.String("path-source", "./", "source path")
 	suffix := flag.String("suffix", "", ".log")
@@ -143,9 +141,8 @@ func main() {
 		return
 	}
 
-	err := fileAppender(from, *suffix)
-	if err == nil {
-	} else {
+	err = fileAppender(from, *suffix)
+	if err != nil {
 		panic(err)
 	}
 }

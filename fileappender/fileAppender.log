@@ -1,0 +1,11 @@
+fileAppender: 2021/08/24 12:47:25 2021-08-13
+fileAppender: 2021/08/24 12:47:25 source path : e:\document/2021-08-13/
+fileAppender: 2021/08/24 12:47:25 baseDir: e:\document\2021-08-13 
+fileAppender: 2021/08/24 12:47:25 path: e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log.2021-08-13 
+fileAppender: 2021/08/24 12:47:25 rolledfile name is : e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log.2021-08-13 : size : 1275268846
+fileAppender: 2021/08/24 12:47:25 currnetseekpos: 1275268846 
+fileAppender: 2021/08/24 12:47:25 log fileName is : e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log 
+fileAppender: 2021/08/24 12:47:25 log file [e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log] append to rolled file [e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log.2021-08-13]'s end 
+fileAppender: 2021/08/24 12:47:25 write size: 32094 
+fileAppender: 2021/08/24 12:47:25 remove log file [e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log]
+fileAppender: 2021/08/24 12:47:25 rolled filename [e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log.2021-08-13] is renamed log filename [e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log] 
