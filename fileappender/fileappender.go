@@ -22,10 +22,11 @@ func fileAppender(source, target string) error {
 		baseDir, err = filepath.Abs(source)
 		if err != nil {
 			panic(err)
-			return err
 		}
 	}
 	logger.Printf("baseDir: %s \n", baseDir)
+
+	bFind := false
 
 	filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -34,73 +35,77 @@ func fileAppender(source, target string) error {
 
 		currentname := filepath.Join(baseDir, info.Name())
 
-		if info.IsDir() == false && strings.HasSuffix(currentname, target) == false {
-			logger.Printf("path: %s \n", path)
-			logger.Printf("rolledfile name is : %s : size : %d\n", currentname, info.Size())
+		if info.IsDir() || strings.HasSuffix(currentname, target) {
+			return nil
+		}
+		bFind = true
+		logger.Printf("path: %s \n", path)
+		logger.Printf("rolledfile name is : %s : size : %d\n", currentname, info.Size())
 
-			rolledFileName := currentname
-			rolledFP, err := os.OpenFile(rolledFileName, os.O_APPEND|os.O_WRONLY, 0600)
+		rolledFileName := currentname
+		rolledFP, err := os.OpenFile(rolledFileName, os.O_APPEND|os.O_WRONLY, 0600)
 
-			if err != nil {
-				panic(err)
-			}
-			defer rolledFP.Close()
+		if err != nil {
+			panic(err)
+		}
+		defer rolledFP.Close()
 
-			currentPos, err := rolledFP.Seek(0, 2)
-			if err != nil {
-				logger.Panicln("unable to seek to the end of")
-				os.Exit(3)
-			}
-			logger.Printf("currnetseekpos: %d \n", currentPos)
-			bufWriter := bufio.NewWriter(rolledFP)
+		currentPos, err := rolledFP.Seek(0, 2)
+		if err != nil {
+			logger.Panicln("unable to seek to the end of")
+			os.Exit(3)
+		}
+		logger.Printf("currnetseekpos: %d \n", currentPos)
+		bufWriter := bufio.NewWriter(rolledFP)
 
-			removeindex := strings.LastIndex(rolledFileName, target) + len(target)
-			logFileName := rolledFileName[:removeindex]
+		removeindex := strings.LastIndex(rolledFileName, target) + len(target)
+		logFileName := rolledFileName[:removeindex]
 
-			if _, err := os.Stat(logFileName); os.IsNotExist(err) {
-				logger.Printf("log file path : %s is not exist.\n", logFileName)
-				logger.Println("exit program!")
-				return nil
-			}
+		if _, err := os.Stat(logFileName); os.IsNotExist(err) {
+			logger.Printf("log file path : %s is not exist.\n", logFileName)
+			logger.Println("exit program!")
+			return nil
+		}
 
-			logger.Printf("log fileName is : %s \n", logFileName)
+		logger.Printf("log fileName is : %s \n", logFileName)
 
-			logFP, err := os.OpenFile(logFileName, os.O_RDONLY|os.O_RDWR, 0644)
+		logFP, err := os.OpenFile(logFileName, os.O_RDONLY|os.O_RDWR, 0644)
 
-			if err != nil {
-				panic(err)
-			}
-			defer logFP.Close()
+		if err != nil {
+			panic(err)
+		}
+		defer logFP.Close()
 
-			bufReader := bufio.NewReader(logFP)
+		bufReader := bufio.NewReader(logFP)
 
-			logger.Printf("log file [%s] append to rolled file [%s]'s end \n", logFileName, rolledFileName)
-			written, err := io.Copy(bufWriter, bufReader)
+		logger.Printf("log file [%s] append to rolled file [%s]'s end \n", logFileName, rolledFileName)
+		written, err := io.Copy(bufWriter, bufReader)
 
-			logger.Printf("write size: %d \n", written)
-			if err != nil {
-				panic(err)
-			}
+		logger.Printf("write size: %d \n", written)
+		if err != nil {
+			panic(err)
+		}
 
-			logFP.Close()
-			logger.Printf("remove log file [%s]\n", logFileName)
-			err = os.Remove(logFileName)
+		logFP.Close()
+		logger.Printf("remove log file [%s]\n", logFileName)
+		err = os.Remove(logFileName)
 
-			if err != nil {
-				panic(err)
-			}
-			rolledFP.Close()
-			logger.Printf("rolled filename [%s] is renamed log filename [%s] \n", rolledFileName, logFileName)
-			err = os.Rename(rolledFileName, logFileName)
+		if err != nil {
+			panic(err)
+		}
+		rolledFP.Close()
+		logger.Printf("rolled filename [%s] is renamed log filename [%s] \n", rolledFileName, logFileName)
+		err = os.Rename(rolledFileName, logFileName)
 
-			if err != nil {
-				panic(err)
-			}
+		if err != nil {
+			panic(err)
 		}
 
 		return err
 	})
-
+	if !bFind {
+		logger.Printf("can not found log rolled file \n")
+	}
 	return err
 }
 

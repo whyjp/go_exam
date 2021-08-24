@@ -9,3 +9,10 @@ fileAppender: 2021/08/24 12:47:25 log file [e:\document\2021-08-13\2021-08-13_KO
 fileAppender: 2021/08/24 12:47:25 write size: 32094 
 fileAppender: 2021/08/24 12:47:25 remove log file [e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log]
 fileAppender: 2021/08/24 12:47:25 rolled filename [e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log.2021-08-13] is renamed log filename [e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log] 
+fileAppender: 2021/08/24 15:55:50 2021-08-13
+fileAppender: 2021/08/24 15:55:50 source path : e:\document/2021-08-13/
+fileAppender: 2021/08/24 15:55:50 baseDir: e:\document\2021-08-13 
+fileAppender: 2021/08/24 15:57:42 2021-08-13
+fileAppender: 2021/08/24 15:57:42 source path : e:\document/2021-08-13/
+fileAppender: 2021/08/24 15:57:42 baseDir: e:\document\2021-08-13 
+fileAppender: 2021/08/24 15:57:42 can not found log rolled file 
