@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 func fileAppender(source, target string) error {
@@ -57,6 +58,12 @@ func fileAppender(source, target string) error {
 			removeindex := strings.LastIndex(currentname, target) + 4
 			logger.Printf("find %s from %s - removefrom :%d\n", target, currentname, removeindex)
 			pairFileName := currentname[:removeindex]
+
+			if _, err := os.Stat(pairFileName); os.IsNotExist(err) {
+				logger.Printf("pairFile path : %s is not exist.\n", pairFileName)
+				logger.Println("exit program!")
+				return
+			}
 
 			logger.Printf("pairFile: %s \n", pairFileName)
 			pairFile, err := os.OpenFile(pairFileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
@@ -114,13 +121,20 @@ func main() {
 	path_source := flag.String("path-source", "./", "source path")
 	suffix := flag.String("suffix", "", ".log")
 
+	offsetDay := flag.Int("offsetDay", -1, "day offset : int")
+	offsetMon := flag.Int("offsetMon", 0, "mon offset : int (default 0)")
+	offsetYear := flag.Int("offsetYear", 0, "year offset : int (default 0)")
+
 	flag.Parse()
 	if flag.NFlag() == 0 {
 		flag.Usage()
 		return
 	}
 
-	err := fileAppender(*path_source, *suffix)
+	now := time.Now().AddDate(*offsetYear, *offsetMon, *offsetDay).Format("2006-01-02")
+	logger.Println(now)
+
+	err := fileAppender(*path_source+"/"+now, *suffix)
 	if err == nil {
 	} else {
 		panic(err)

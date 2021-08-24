@@ -7,7 +7,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"strings"
 	"time"
 )
 
@@ -38,7 +37,7 @@ func zipit(source, target string) error {
 			return err
 		}
 
-		if baseDir == info.Name() && info.IsDir() {
+		if sourceAbs == info.Name() && info.IsDir() {
 			curAbs, err := filepath.Abs(path)
 			if err != nil {
 				return err
@@ -54,7 +53,7 @@ func zipit(source, target string) error {
 			return err
 		}
 		if baseDir != "" {
-			header.Name = filepath.Join(baseDir, strings.TrimPrefix(path, source))
+			//header.Name = filepath.Join(baseDir, strings.TrimPrefix(path, source))
 		}
 
 		if info.IsDir() {
@@ -88,7 +87,7 @@ var logger *log.Logger
 
 func main() {
 	//initlogger
-	logger = log.New(os.Stdout, "fileAppender,: ", log.LstdFlags)
+	logger = log.New(os.Stdout, "zipzen: ", log.LstdFlags)
 
 	path_source := flag.String("path-source", "./", "source path")
 	path_dest := flag.String("path-dest", "./", "dest path")
@@ -105,12 +104,28 @@ func main() {
 	}
 
 	now := time.Now().AddDate(*offsetYear, *offsetMon, *offsetDay).Format("2006-01-02")
-	logger.Println(now)
-	logger.Printf("source path : %s\n", *path_source)
-	logger.Printf("output file : %s\n", now+*suffix+".zip")
-	err := zipit(*path_source+now+"/", *path_dest+now+*suffix+".zip")
+	from := *path_source + "/" + now + "/"
+	to := *path_dest + "/" + now + *suffix + ".zip"
+	logger.Printf("date folder is set %s , by date offset %4d-%2d-%2d",
+		now, *offsetYear, *offsetMon, *offsetDay)
+	logger.Printf("source path : %s\n", from)
+	logger.Printf("output file : %s\n", to)
+
+	//check it
+	if _, err := os.Stat(from); os.IsNotExist(err) {
+		logger.Printf("source path : %s is not exist.\n", from)
+		logger.Println("exit program!")
+		return
+	}
+	if _, err := os.Stat(to); os.IsNotExist(err) {
+		logger.Printf("dest path : %s is not exist.\n", from)
+		logger.Println("exit program!")
+		return
+	}
+
+	err := zipit(from, to)
 	if err == nil {
-		logger.Printf("file achive successful dest[%s] source[%s]\n", *path_dest+now+*suffix+".zip", *path_source+now)
+		logger.Printf("file achive successful dest[%s] source[%s]\n", to, from)
 	} else {
 		panic(err)
 	}
