@@ -113,13 +113,14 @@ var logger *log.Logger
 
 func main() {
 	//initlogger
-	fpLog, err := os.OpenFile("fileAppender.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	binName := "fileAppender"
+	fpLog, err := os.OpenFile(binName+".log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		panic(err)
 	}
 	defer fpLog.Close()
 	multiWriter := io.MultiWriter(fpLog, os.Stdout)
-	logger = log.New(multiWriter, "fileAppender: ", log.LstdFlags)
+	logger = log.New(multiWriter, binName+" : ", log.LstdFlags)
 
 	path_source := flag.String("path-source", "./", "source path")
 	suffix := flag.String("suffix", "", ".log")

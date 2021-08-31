@@ -87,7 +87,14 @@ var logger *log.Logger
 
 func main() {
 	//initlogger
-	logger = log.New(os.Stdout, "zipzen: ", log.LstdFlags)
+	binName := "zipzen"
+	fpLog, err := os.OpenFile(binName+".log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		panic(err)
+	}
+	defer fpLog.Close()
+	multiWriter := io.MultiWriter(fpLog, os.Stdout)
+	logger = log.New(multiWriter, binName+" : ", log.LstdFlags)
 
 	path_source := flag.String("path-source", "./", "source path")
 	path_dest := flag.String("path-dest", "./", "dest path")
@@ -123,7 +130,7 @@ func main() {
 		return
 	}
 
-	err := zipit(from, to)
+	err = zipit(from, to)
 	if err == nil {
 		logger.Printf("file achive successful dest[%s] source[%s]\n", to, from)
 	} else {
