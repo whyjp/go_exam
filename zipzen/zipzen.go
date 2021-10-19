@@ -37,8 +37,8 @@ func zipit(source, target string) error {
 			return err
 		}
 
-		if sourceAbs == info.Name() && info.IsDir() {
-			curAbs, err := filepath.Abs(path)
+		curAbs, err := filepath.Abs(path)
+		if sourceAbs == curAbs && info.IsDir() {
 			if err != nil {
 				return err
 			}
@@ -98,7 +98,7 @@ func main() {
 
 	path_source := flag.String("path-source", "./", "source path")
 	path_dest := flag.String("path-dest", "./", "dest path")
-	suffix := flag.String("suffix", "", "YYYY-MM-DD-*suffix*.zip type for suffix")
+	suffix := flag.String("suffix", "", "YYYY-MM-DD*suffix*.zip type for suffix (not have def separator(ex, - or _)")
 
 	offsetDay := flag.Int("offsetDay", -1, "day offset : int")
 	offsetMon := flag.Int("offsetMon", 0, "mon offset : int (default 0)")
@@ -111,7 +111,7 @@ func main() {
 	}
 
 	now := time.Now().AddDate(*offsetYear, *offsetMon, *offsetDay).Format("2006-01-02")
-	from := *path_source + "/" + now + "/"
+	from := *path_source + "/" + now
 	to := *path_dest + "/" + now + *suffix + ".zip"
 	logger.Printf("date folder is set %s , by date offset %4d-%2d-%2d",
 		now, *offsetYear, *offsetMon, *offsetDay)

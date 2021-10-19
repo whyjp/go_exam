@@ -1,0 +1,25 @@
+zipzen : 2021/09/08 16:24:13 date folder is set 2021-08-13 , by date offset    0--1- 5
+zipzen : 2021/09/08 16:24:13 source path : e:\document/2021-08-13/
+zipzen : 2021/09/08 16:24:13 output file : .//2021-08-13asdf.zip
+zipzen : 2021/09/08 16:24:13 achive here : e:\document/2021-08-13/
+zipzen : 2021/09/08 16:24:24 file achive successful dest[.//2021-08-13asdf.zip] source[e:\document/2021-08-13/]
+zipzen : 2021/09/09 14:46:24 date folder is set 2021-08-13 , by date offset    0--1- 4
+zipzen : 2021/09/09 14:46:24 source path : e:\document/2021-08-13
+zipzen : 2021/09/09 14:46:24 output file : .//2021-08-13asdf.zip
+zipzen : 2021/09/09 14:46:24 achive here : e:\document/2021-08-13
+zipzen : 2021/09/09 14:46:41 file achive successful dest[.//2021-08-13asdf.zip] source[e:\document/2021-08-13]
+zipzen : 2021/09/09 14:53:22 date folder is set 2021-08-13 , by date offset    0--1- 4
+zipzen : 2021/09/09 14:53:22 source path : e:\document/2021-08-13
+zipzen : 2021/09/09 14:53:22 output file : .//2021-08-13asdf.zip
+zipzen : 2021/09/09 14:53:22 achive here : e:\document/2021-08-13
+zipzen : 2021/09/09 14:53:22 curAbs : [e:\document\2021-08-13] rootAbs : [e:\document\2021-08-13] into :[2021-08-13]
+zipzen : 2021/09/09 14:53:22 curAbs : [e:\document\2021-08-13\2021-08-13_KOR_MUA_II_60001.log] rootAbs : [e:\document\2021-08-13] into :[2021-08-13_KOR_MUA_II_60001.log]
+zipzen : 2021/09/09 14:53:32 file achive successful dest[.//2021-08-13asdf.zip] source[e:\document/2021-08-13]
+zipzen : 2021/09/09 15:03:52 date folder is set 2021-08-13 , by date offset    0--1- 4
+zipzen : 2021/09/09 15:03:52 source path : e:\document/2021-08-13
+zipzen : 2021/09/09 15:03:52 output file : .//2021-08-13asdf.zip
+zipzen : 2021/09/09 15:03:52 achive here : e:\document/2021-08-13
+zipzen : 2021/09/09 15:03:52 curAbs : [e:\document\2021-08-13] rootAbs : [e:\document\2021-08-13]
+zipzen : 2021/09/09 15:03:52 root dir is skipped
+
+zipzen : 2021/09/09 15:04:03 file achive successful dest[.//2021-08-13asdf.zip] source[e:\document/2021-08-13]
