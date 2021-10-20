@@ -2,15 +2,38 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+
+	v1 := r.Group("/v1")
+	{
+		v1.GET("/health", health)
+		v1.POST("/signup", signup)
+		v1.POST("/login", login)
+	}
+	r.Use()
+	r.Run()
+}
+
+func health(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "ok",
 	})
-	r.Run("0.0.0.0:7070") // listen and serve on 0.0.0.0:8080
+}
+
+func signup(c *gin.Context) {
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "signed up",
+	})
+}
+
+func login(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "logged in",
+	})
 }
