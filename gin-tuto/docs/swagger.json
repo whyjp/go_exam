@@ -1,10 +1,24 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "This is a sample server Petstore server.",
+        "title": "Swagger Example API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
     },
+    "host": "petstore.swagger.io:8080",
+    "basePath": "/v2",
     "paths": {
-        "/v1/{name}": {
+        "/v1/health": {
             "get": {
                 "description": "자세한 설명은 이곳에 적습니다.",
                 "consumes": [
@@ -14,15 +28,40 @@
                     "application/json"
                 ],
                 "summary": "써머리를 직접 수정했습니다",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User name",
-                        "name": "name",
-                        "in": "path",
-                        "required": true
+                "responses": {
+                    "200": {
+                        "description": ""
                     }
+                }
+            }
+        },
+        "/v1/login": {
+            "post": {
+                "description": "자세한 설명은 이곳에 적습니다.",
+                "consumes": [
+                    "application/json"
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "써머리를 직접 수정했습니다",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/v1/signup": {
+            "post": {
+                "description": "자세한 설명은 이곳에 적습니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "써머리를 직접 수정했습니다",
                 "responses": {
                     "200": {
                         "description": ""

@@ -17,13 +17,22 @@ var doc = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/v1/{name}": {
+        "/v1/health": {
             "get": {
                 "description": "자세한 설명은 이곳에 적습니다.",
                 "consumes": [
@@ -33,15 +42,40 @@ var doc = `{
                     "application/json"
                 ],
                 "summary": "써머리를 직접 수정했습니다",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User name",
-                        "name": "name",
-                        "in": "path",
-                        "required": true
+                "responses": {
+                    "200": {
+                        "description": ""
                     }
+                }
+            }
+        },
+        "/v1/login": {
+            "post": {
+                "description": "자세한 설명은 이곳에 적습니다.",
+                "consumes": [
+                    "application/json"
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "써머리를 직접 수정했습니다",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/v1/signup": {
+            "post": {
+                "description": "자세한 설명은 이곳에 적습니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "써머리를 직접 수정했습니다",
                 "responses": {
                     "200": {
                         "description": ""
@@ -63,12 +97,12 @@ type swaggerInfo struct {
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
-	Version:     "",
-	Host:        "",
-	BasePath:    "",
+	Version:     "1.0",
+	Host:        "petstore.swagger.io:8080",
+	BasePath:    "/v2",
 	Schemes:     []string{},
-	Title:       "",
-	Description: "",
+	Title:       "Swagger Example API",
+	Description: "This is a sample server Petstore server.",
 }
 
 type s struct{}
