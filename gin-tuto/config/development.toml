@@ -1,2 +1,3 @@
 [server]
 port = "localhost:8080"
+log = "notifyhandler.log"
