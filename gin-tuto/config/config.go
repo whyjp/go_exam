@@ -12,7 +12,7 @@ var config *viper.Viper
 func Init(env string) {
 	var err error
 	config = viper.New()
-	config.SetConfigType("yaml")
+	config.SetConfigType("toml")
 	config.SetConfigName(env)
 	config.AddConfigPath("../config/")
 	config.AddConfigPath("config/")
