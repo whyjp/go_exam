@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -40,6 +41,7 @@ func NewRouter() *gin.Engine {
 	v1 := router.Group("/v1")
 	{
 		v1.GET("/health", health)
+		v1.GET("/param/:test/*action", param)
 		v1.POST("/signup", signup)
 		v1.POST("/login", login)
 	}
@@ -59,6 +61,27 @@ func health(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "ok",
 	})
+
+}
+
+// Welcome godoc
+// @Summary 써머리를 직접 수정했습니다
+// @Description 자세한 설명은 이곳에 적습니다.
+// @name get-string-by-int
+// @Accept  json
+// @Produce  json
+// @param test path string true "test"
+// @param action path string true "action"
+// @Router /param/{test}/{action} [get]
+// @Success 200
+func param(c *gin.Context) {
+	val := c.Param("test")
+	action := c.Param("action")
+	message := val + " " + action
+
+	fmt.Println(c.FullPath() == "/param/:test/*action")
+
+	c.String(http.StatusOK, message)
 }
 
 // Welcome godoc

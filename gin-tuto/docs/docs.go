@@ -57,6 +57,39 @@ var doc = `{
                 }
             }
         },
+        "/param/{test}/{action}": {
+            "get": {
+                "description": "자세한 설명은 이곳에 적습니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "써머리를 직접 수정했습니다",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "test",
+                        "name": "test",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "action",
+                        "name": "action",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/signup": {
             "post": {
                 "description": "자세한 설명은 이곳에 적습니다.",
