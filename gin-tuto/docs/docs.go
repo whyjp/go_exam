@@ -32,6 +32,23 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
+                "summary": "site health check is running will return \"working!\"",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/v1/health": {
+            "get": {
+                "description": "자세한 설명은 이곳에 적습니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "summary": "써머리를 직접 수정했습니다",
                 "responses": {
                     "200": {
@@ -40,7 +57,7 @@ var doc = `{
                 }
             }
         },
-        "/login": {
+        "/v1/login": {
             "post": {
                 "description": "자세한 설명은 이곳에 적습니다.",
                 "consumes": [
@@ -57,7 +74,7 @@ var doc = `{
                 }
             }
         },
-        "/param/{test}/{action}": {
+        "/v1/param/{test}/{action}": {
             "get": {
                 "description": "자세한 설명은 이곳에 적습니다.",
                 "consumes": [
@@ -90,7 +107,7 @@ var doc = `{
                 }
             }
         },
-        "/signup": {
+        "/v1/signup": {
             "post": {
                 "description": "자세한 설명은 이곳에 적습니다.",
                 "consumes": [

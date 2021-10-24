@@ -11,8 +11,19 @@ paths:
       responses:
         "200":
           description: ""
+      summary: site health check is running will return "working!"
+  /v1/health:
+    get:
+      consumes:
+      - application/json
+      description: 자세한 설명은 이곳에 적습니다.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
       summary: 써머리를 직접 수정했습니다
-  /login:
+  /v1/login:
     post:
       consumes:
       - application/json
@@ -23,7 +34,7 @@ paths:
         "200":
           description: ""
       summary: 써머리를 직접 수정했습니다
-  /param/{test}/{action}:
+  /v1/param/{test}/{action}:
     get:
       consumes:
       - application/json
@@ -45,7 +56,7 @@ paths:
         "200":
           description: ""
       summary: 써머리를 직접 수정했습니다
-  /signup:
+  /v1/signup:
     post:
       consumes:
       - application/json

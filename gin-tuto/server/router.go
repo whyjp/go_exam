@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"webzen.com/notifyhandler/api"
 	"webzen.com/notifyhandler/docs"
 )
 
@@ -23,13 +24,13 @@ import (
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
 // @host petstore.swagger.io:8080
-// @BasePath /v2
+// @BasePath
 func NewRouter() *gin.Engine {
 	docs.SwaggerInfo.Title = "Swagger API"
 	docs.SwaggerInfo.Description = "This is a sample server for Swagger."
 	docs.SwaggerInfo.Version = "1.0"
 	docs.SwaggerInfo.Host = "localhost:8080/"
-	docs.SwaggerInfo.BasePath = "v1"
+	//docs.SwaggerInfo.BasePath = "v1"
 
 	router := gin.New()
 	router.Use(gin.Logger())
@@ -37,6 +38,8 @@ func NewRouter() *gin.Engine {
 
 	//router := gin.Default()
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	healthroot := new(api.HealthController)
+	router.GET("/health", healthroot.Status)
 
 	v1 := router.Group("/v1")
 	{
@@ -55,7 +58,7 @@ func NewRouter() *gin.Engine {
 // @name get-string-by-int
 // @Accept  json
 // @Produce  json
-// @Router /health [get]
+// @Router /v1/health [get]
 // @Success 200
 func health(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
@@ -72,7 +75,7 @@ func health(c *gin.Context) {
 // @Produce  json
 // @param test path string true "test"
 // @param action path string true "action"
-// @Router /param/{test}/{action} [get]
+// @Router /v1/param/{test}/{action} [get]
 // @Success 200
 func param(c *gin.Context) {
 	val := c.Param("test")
@@ -90,7 +93,7 @@ func param(c *gin.Context) {
 // @name get-string-by-int
 // @Accept  json
 // @Produce  json
-// @Router /signup [POST]
+// @Router /v1/signup [POST]
 // @Success 200
 func signup(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{
@@ -104,7 +107,7 @@ func signup(c *gin.Context) {
 // @name get-string-by-int
 // @Accept  json
 // @Produce  json
-// @Router /login [POST]
+// @Router /v1/login [POST]
 // @Success 200
 func login(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
