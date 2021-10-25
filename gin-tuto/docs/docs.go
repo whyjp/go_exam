@@ -57,6 +57,34 @@ var doc = `{
                 }
             }
         },
+        "/v1/jsonMailTest": {
+            "post": {
+                "description": "자세한 설명은 이곳에 적습니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "jsonparam binding test",
+                "parameters": [
+                    {
+                        "description": "post jsonmail for test",
+                        "name": "jsonbody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.StMailTest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/v1/jsonTest": {
             "post": {
                 "description": "자세한 설명은 이곳에 적습니다.",
@@ -168,6 +196,9 @@ var doc = `{
                     "type": "string"
                 }
             }
+        },
+        "models.StMailTest": {
+            "type": "object"
         }
     }
 }`

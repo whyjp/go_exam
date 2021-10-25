@@ -1,7 +1,10 @@
 package server
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -49,6 +52,7 @@ func NewRouter() *gin.Engine {
 		v1.POST("/signup", signup)
 		v1.POST("/login", login)
 		v1.POST("/jsonTest", jsonTest)
+		v1.POST("/jsonMailTest", jsonMailTest)
 	}
 
 	return router
@@ -141,5 +145,62 @@ func jsonTest(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"status": "you are success put json",
 		"info":   json,
+	})
+}
+
+// Welcome godoc
+// @Summary jsonparam binding test
+// @Description 자세한 설명은 이곳에 적습니다.
+// @name get-string-by-int
+// @Accept  json
+// @Produce  json
+// @Param  jsonbody body models.StMailTest true "post jsonmail for test"
+// @Router /v1/jsonMailTest [POST]
+// @Success 200
+func jsonMailTest(c *gin.Context) {
+	var jsonMail_ models.StMailTest
+	if err := c.ShouldBindJSON(&jsonMail_); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	//if jsonMail.from == "" || jsonMail.to == "" {
+	//	c.JSON(http.StatusUnauthorized, gin.H{"status": "json is empty"})
+	//	return
+	//}
+
+	fmt.Println(jsonMail_.From)
+	pbytes, _ := json.Marshal(jsonMail_)
+	buff := bytes.NewBuffer(pbytes)
+
+	// Request 객체 생성
+	req, err := http.NewRequest("POST", "http://10.105.33.38/alert/api/v2/email", buff)
+	if err != nil {
+		panic(err)
+	}
+
+	//Content-Type 헤더 추가
+	req.Header.Add("accept", "application/json")
+	req.Header.Add("Content-Type", "application/json")
+
+	// Client객체에서 Request 실행
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	// Response 체크.
+	respBody, err := ioutil.ReadAll(resp.Body)
+	if err == nil {
+		str := string(respBody)
+		println(str)
+		c.String(http.StatusOK, str)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status": "you are success put json",
+		"info":   jsonMail_,
 	})
 }

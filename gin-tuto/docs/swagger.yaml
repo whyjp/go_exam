@@ -9,6 +9,8 @@ definitions:
     - first
     - second
     type: object
+  models.StMailTest:
+    type: object
 info:
   contact: {}
 paths:
@@ -34,6 +36,24 @@ paths:
         "200":
           description: ""
       summary: 써머리를 직접 수정했습니다
+  /v1/jsonMailTest:
+    post:
+      consumes:
+      - application/json
+      description: 자세한 설명은 이곳에 적습니다.
+      parameters:
+      - description: post jsonmail for test
+        in: body
+        name: jsonbody
+        required: true
+        schema:
+          $ref: '#/definitions/models.StMailTest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: jsonparam binding test
   /v1/jsonTest:
     post:
       consumes:
