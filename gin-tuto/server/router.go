@@ -9,6 +9,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"webzen.com/notifyhandler/api"
 	"webzen.com/notifyhandler/docs"
+	"webzen.com/notifyhandler/models"
 )
 
 // @title Swagger Example API
@@ -47,6 +48,7 @@ func NewRouter() *gin.Engine {
 		v1.GET("/param/:test/*action", param)
 		v1.POST("/signup", signup)
 		v1.POST("/login", login)
+		v1.POST("/jsonTest", jsonTest)
 	}
 
 	return router
@@ -112,5 +114,32 @@ func signup(c *gin.Context) {
 func login(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "logged in",
+	})
+}
+
+// Welcome godoc
+// @Summary jsonparam binding test
+// @Description 자세한 설명은 이곳에 적습니다.
+// @name get-string-by-int
+// @Accept  json
+// @Produce  json
+// @Param  jsonbody body models.StJsonTest true "post json for test"
+// @Router /v1/jsonTest [POST]
+// @Success 200
+func jsonTest(c *gin.Context) {
+	var json models.StJsonTest
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if json.First == "" || json.Second == "" {
+		c.JSON(http.StatusUnauthorized, gin.H{"status": "json is empty"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "you are success put json",
+		"info":   json,
 	})
 }
