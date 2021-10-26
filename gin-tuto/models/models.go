@@ -1,13 +1,19 @@
 package models
 
 type StJsonTest struct {
-	First  string `form:"first" json:"first" xml:"first" binding:"required"`
-	Second string `form:"second" json:"second" xml:"second" binding:"required"`
+	First  string `json:"first" binding:"required" example:"first-exam"`
+	Second string `json:"second" binding:"required" example:"second-exam"`
 }
 
-type StMailTest struct {
-	From    string `form:"from" json:"from" xml:"from" binding:"required"`
-	To      string `form:"to" json:"to" xml:"to" binding:"required"`
-	Title   string `form:"title" json:"title" xml:"title" binding:"required"`
-	Content string `form:"content" json:"content" xml:"content" binding:"required"`
+type STNotiCommon struct {
+	From  string   `json:"from" binding:"required" example:"from-id"`
+	To    []string `json:"to" binding:"required" example:"to-destination"`
+	Title string   `json:"title" binding:"required" example:"title"`
+}
+type STNotiMail struct {
+	STNotiCommon
+	Content ContentMail `json:"content"`
+}
+type ContentMail struct {
+	Text string `json:"text" example:"content text in notify mail"`
 }

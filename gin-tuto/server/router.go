@@ -1,13 +1,11 @@
 package server
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-resty/resty/v2"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"webzen.com/notifyhandler/api"
@@ -46,6 +44,7 @@ func NewRouter() *gin.Engine {
 	router.GET("/health", healthroot.Status)
 
 	v1 := router.Group("/v1")
+	v1.Use(gin.Logger())
 	{
 		v1.GET("/health", health)
 		v1.GET("/param/:test/*action", param)
@@ -154,53 +153,58 @@ func jsonTest(c *gin.Context) {
 // @name get-string-by-int
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body models.StMailTest true "post jsonmail for test"
+// @Param  jsonbody body models.STNotiMail true "post jsonmail for test"
 // @Router /v1/jsonMailTest [POST]
 // @Success 200
 func jsonMailTest(c *gin.Context) {
-	var jsonMail_ models.StMailTest
-	if err := c.ShouldBindJSON(&jsonMail_); err != nil {
+	var jsonMail models.STNotiMail
+	if err := c.ShouldBindJSON(&jsonMail); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	//if jsonMail.from == "" || jsonMail.to == "" {
-	//	c.JSON(http.StatusUnauthorized, gin.H{"status": "json is empty"})
-	//	return
-	//}
-
-	fmt.Println(jsonMail_.From)
-	pbytes, _ := json.Marshal(jsonMail_)
-	buff := bytes.NewBuffer(pbytes)
-
-	// Request 객체 생성
-	req, err := http.NewRequest("POST", "http://10.105.33.38/alert/api/v2/email", buff)
-	if err != nil {
-		panic(err)
+	type AuthSuccess struct {
+	}
+	type AuthError struct {
 	}
 
-	//Content-Type 헤더 추가
-	req.Header.Add("accept", "application/json")
-	req.Header.Add("Content-Type", "application/json")
+	fmt.Println(jsonMail)
 
-	// Client객체에서 Request 실행
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
+	client := resty.New()
+	resp, err := client.R().
+		SetBody(jsonMail).
+		SetResult(AuthSuccess{}). // or SetResult(AuthSuccess{}).
+		SetError(&AuthError{}).   // or SetError(AuthError{}).
+		Post("http://10.105.33.38/alert/api/v2/email")
 
-	// Response 체크.
-	respBody, err := ioutil.ReadAll(resp.Body)
-	if err == nil {
-		str := string(respBody)
-		println(str)
-		c.String(http.StatusOK, str)
-		return
-	}
+	// Explore response object
+	fmt.Println("Response Info:")
+	fmt.Println("  Error      :", err)
+	fmt.Println("  Status Code:", resp.StatusCode())
+	fmt.Println("  Status     :", resp.Status())
+	fmt.Println("  Proto      :", resp.Proto())
+	fmt.Println("  Time       :", resp.Time())
+	fmt.Println("  Received At:", resp.ReceivedAt())
+	fmt.Println("  Body       :\n", resp)
+	fmt.Println()
+	fmt.Println("Request Trace Info:")
+	ti := resp.Request.TraceInfo()
+	fmt.Println("  DNSLookup     :", ti.DNSLookup)
+	fmt.Println("  ConnTime      :", ti.ConnTime)
+	fmt.Println("  TCPConnTime   :", ti.TCPConnTime)
+	fmt.Println("  TLSHandshake  :", ti.TLSHandshake)
+	fmt.Println("  ServerTime    :", ti.ServerTime)
+	fmt.Println("  ResponseTime  :", ti.ResponseTime)
+	fmt.Println("  TotalTime     :", ti.TotalTime)
+	fmt.Println("  IsConnReused  :", ti.IsConnReused)
+	fmt.Println("  IsConnWasIdle :", ti.IsConnWasIdle)
+	fmt.Println("  ConnIdleTime  :", ti.ConnIdleTime)
+	fmt.Println("  RequestAttempt:", ti.RequestAttempt)
+	//fmt.Println("  RemoteAddr    :", ti.RemoteAddr.String())
+
 	c.JSON(http.StatusOK, gin.H{
-		"status": "you are success put json",
-		"info":   jsonMail_,
+		"status": "you are post put json",
+		"info":   jsonMail,
+		"err":    err,
 	})
 }

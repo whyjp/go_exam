@@ -1,15 +1,42 @@
 definitions:
+  models.ContentMail:
+    properties:
+      text:
+        example: content text in notify mail
+        type: string
+    type: object
+  models.STNotiMail:
+    properties:
+      content:
+        $ref: '#/definitions/models.ContentMail'
+      from:
+        example: from-id
+        type: string
+      title:
+        example: title
+        type: string
+      to:
+        example:
+        - to-destination
+        items:
+          type: string
+        type: array
+    required:
+    - from
+    - title
+    - to
+    type: object
   models.StJsonTest:
     properties:
       first:
+        example: first-exam
         type: string
       second:
+        example: second-exam
         type: string
     required:
     - first
     - second
-    type: object
-  models.StMailTest:
     type: object
 info:
   contact: {}
@@ -47,7 +74,7 @@ paths:
         name: jsonbody
         required: true
         schema:
-          $ref: '#/definitions/models.StMailTest'
+          $ref: '#/definitions/models.STNotiMail'
       produces:
       - application/json
       responses:

@@ -74,7 +74,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.StMailTest"
+                            "$ref": "#/definitions/models.STNotiMail"
                         }
                     }
                 ],
@@ -182,6 +182,45 @@ var doc = `{
         }
     },
     "definitions": {
+        "models.ContentMail": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "example": "content text in notify mail"
+                }
+            }
+        },
+        "models.STNotiMail": {
+            "type": "object",
+            "required": [
+                "from",
+                "title",
+                "to"
+            ],
+            "properties": {
+                "content": {
+                    "$ref": "#/definitions/models.ContentMail"
+                },
+                "from": {
+                    "type": "string",
+                    "example": "from-id"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "title"
+                },
+                "to": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "to-destination"
+                    ]
+                }
+            }
+        },
         "models.StJsonTest": {
             "type": "object",
             "required": [
@@ -190,15 +229,14 @@ var doc = `{
             ],
             "properties": {
                 "first": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "first-exam"
                 },
                 "second": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "second-exam"
                 }
             }
-        },
-        "models.StMailTest": {
-            "type": "object"
         }
     }
 }`
