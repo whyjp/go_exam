@@ -51,11 +51,11 @@ func Param(c *gin.Context) {
 // @name get-string-by-int
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.STNotiMail true "post jsonmail for test"
+// @Param  jsonbody body model.STNotifyMail true "post jsonmail for test"
 // @Router /v1/jsonMailTest [POST]
 // @Success 200
 func JsonMailTest(c *gin.Context) {
-	var jsonMail model.STNotiMail
+	var jsonMail model.STNotifyMail
 	if err := c.ShouldBindJSON(&jsonMail); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

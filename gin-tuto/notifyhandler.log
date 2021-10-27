@@ -7,9 +7,18 @@
 [GIN-debug] GET    /v1/param/:test/*action   --> webzen.com/notifyhandler/api.Param (5 handlers)
 [GIN-debug] POST   /v1/jsonMailTest          --> webzen.com/notifyhandler/api.JsonMailTest (5 handlers)
 [GIN-debug] Listening and serving HTTP on :8080
-[GIN] 2021/10/27 - 20:59:40 | 200 |            0s |             ::1 | GET      "/health"
-[GIN] 2021/10/27 - 20:59:42 | 200 |            0s |             ::1 | GET      "/health"
-[GIN] 2021/10/27 - 20:59:43 | 200 |            0s |             ::1 | GET      "/health"
-[GIN] 2021/10/27 - 20:59:43 | 200 |            0s |             ::1 | GET      "/health"
-[GIN] 2021/10/27 - 20:59:44 | 200 |      1.0696ms |             ::1 | GET      "/health"
-[GIN] 2021/10/27 - 20:59:44 | 200 |            0s |             ::1 | GET      "/health"
+[GIN] 2021/10/27 - 22:56:42 | 200 |       512.4µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/10/27 - 22:56:42 | 200 |      3.3168ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/10/27 - 22:56:42 | 200 |     17.3473ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/10/27 - 22:56:42 | 200 |     55.2177ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/10/27 - 22:56:42 | 200 |       120.8µs |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/10/27 - 22:56:43 | 200 |    195.3277ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] GET    /v1/param/:test/*action   --> webzen.com/notifyhandler/api.Param (5 handlers)
+[GIN-debug] POST   /v1/jsonMailTest          --> webzen.com/notifyhandler/api.JsonMailTest (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080

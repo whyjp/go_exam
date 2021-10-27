@@ -57,7 +57,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.STNotiMail"
+                            "$ref": "#/definitions/model.STNotifyMail"
                         }
                     }
                 ],
@@ -112,7 +112,7 @@ var doc = `{
                 }
             }
         },
-        "model.STNotiMail": {
+        "model.STNotifyMail": {
             "type": "object",
             "required": [
                 "from",

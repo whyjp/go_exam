@@ -5,7 +5,7 @@ definitions:
         example: content text in notify mail
         type: string
     type: object
-  model.STNotiMail:
+  model.STNotifyMail:
     properties:
       content:
         $ref: '#/definitions/model.MailContent'
@@ -51,7 +51,7 @@ paths:
         name: jsonbody
         required: true
         schema:
-          $ref: '#/definitions/model.STNotiMail'
+          $ref: '#/definitions/model.STNotifyMail'
       produces:
       - application/json
       responses:

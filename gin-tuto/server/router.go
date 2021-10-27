@@ -31,7 +31,8 @@ import (
 // @BasePath
 func NewRouter(config *viper.Viper) *gin.Engine {
 	logName := config.GetString("server.log")
-	fileLog, err := os.Create(logName)
+	fileLog, err := os.OpenFile(logName, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+
 	if err != nil {
 		log.Fatal(err)
 	}
