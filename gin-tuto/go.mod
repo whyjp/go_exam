@@ -3,6 +3,7 @@ module webzen.com/notifyhandler
 go 1.17
 
 require (
+	github.com/gin-contrib/gzip v0.0.1
 	github.com/gin-gonic/gin v1.7.4
 	github.com/go-resty/resty/v2 v2.6.0
 	github.com/spf13/viper v1.9.0

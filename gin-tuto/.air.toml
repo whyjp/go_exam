@@ -5,7 +5,7 @@ tmp_dir = "tmp"
   bin = "tmp\\main.exe"
   cmd = "swag init && go build -o ./tmp/main.exe ."
   delay = 1000
-  exclude_dir = ["assets", "tmp", "vendor"]
+  exclude_dir = ["assets", "tmp", "vendor", "docs"]
   exclude_file = []
   exclude_regex = []
   exclude_unchanged = false
@@ -26,7 +26,7 @@ tmp_dir = "tmp"
   watcher = "cyan"
 
 [log]
-  time = false
+  time = true
 
 [misc]
   clean_on_exit = false

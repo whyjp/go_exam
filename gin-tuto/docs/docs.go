@@ -40,23 +40,6 @@ var doc = `{
                 }
             }
         },
-        "/v1/health": {
-            "get": {
-                "description": "자세한 설명은 이곳에 적습니다.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "써머리를 직접 수정했습니다",
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                }
-            }
-        },
         "/v1/jsonMailTest": {
             "post": {
                 "description": "자세한 설명은 이곳에 적습니다.",
@@ -74,55 +57,10 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.STNotiMail"
+                            "$ref": "#/definitions/model.STNotiMail"
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/v1/jsonTest": {
-            "post": {
-                "description": "자세한 설명은 이곳에 적습니다.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "jsonparam binding test",
-                "parameters": [
-                    {
-                        "description": "post json for test",
-                        "name": "jsonbody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.StJsonTest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/v1/login": {
-            "post": {
-                "description": "자세한 설명은 이곳에 적습니다.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "써머리를 직접 수정했습니다",
                 "responses": {
                     "200": {
                         "description": ""
@@ -162,27 +100,10 @@ var doc = `{
                     }
                 }
             }
-        },
-        "/v1/signup": {
-            "post": {
-                "description": "자세한 설명은 이곳에 적습니다.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "써머리를 직접 수정했습니다",
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                }
-            }
         }
     },
     "definitions": {
-        "models.ContentMail": {
+        "model.MailContent": {
             "type": "object",
             "properties": {
                 "text": {
@@ -191,7 +112,7 @@ var doc = `{
                 }
             }
         },
-        "models.STNotiMail": {
+        "model.STNotiMail": {
             "type": "object",
             "required": [
                 "from",
@@ -200,7 +121,7 @@ var doc = `{
             ],
             "properties": {
                 "content": {
-                    "$ref": "#/definitions/models.ContentMail"
+                    "$ref": "#/definitions/model.MailContent"
                 },
                 "from": {
                     "type": "string",
@@ -218,23 +139,6 @@ var doc = `{
                     "example": [
                         "to-destination"
                     ]
-                }
-            }
-        },
-        "models.StJsonTest": {
-            "type": "object",
-            "required": [
-                "first",
-                "second"
-            ],
-            "properties": {
-                "first": {
-                    "type": "string",
-                    "example": "first-exam"
-                },
-                "second": {
-                    "type": "string",
-                    "example": "second-exam"
                 }
             }
         }

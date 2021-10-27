@@ -1,14 +1,14 @@
 definitions:
-  models.ContentMail:
+  model.MailContent:
     properties:
       text:
         example: content text in notify mail
         type: string
     type: object
-  models.STNotiMail:
+  model.STNotiMail:
     properties:
       content:
-        $ref: '#/definitions/models.ContentMail'
+        $ref: '#/definitions/model.MailContent'
       from:
         example: from-id
         type: string
@@ -26,18 +26,6 @@ definitions:
     - title
     - to
     type: object
-  models.StJsonTest:
-    properties:
-      first:
-        example: first-exam
-        type: string
-      second:
-        example: second-exam
-        type: string
-    required:
-    - first
-    - second
-    type: object
 info:
   contact: {}
 paths:
@@ -52,17 +40,6 @@ paths:
         "200":
           description: ""
       summary: site health check is running will return "working!"
-  /v1/health:
-    get:
-      consumes:
-      - application/json
-      description: 자세한 설명은 이곳에 적습니다.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: ""
-      summary: 써머리를 직접 수정했습니다
   /v1/jsonMailTest:
     post:
       consumes:
@@ -74,42 +51,13 @@ paths:
         name: jsonbody
         required: true
         schema:
-          $ref: '#/definitions/models.STNotiMail'
+          $ref: '#/definitions/model.STNotiMail'
       produces:
       - application/json
       responses:
         "200":
           description: ""
       summary: jsonparam binding test
-  /v1/jsonTest:
-    post:
-      consumes:
-      - application/json
-      description: 자세한 설명은 이곳에 적습니다.
-      parameters:
-      - description: post json for test
-        in: body
-        name: jsonbody
-        required: true
-        schema:
-          $ref: '#/definitions/models.StJsonTest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: ""
-      summary: jsonparam binding test
-  /v1/login:
-    post:
-      consumes:
-      - application/json
-      description: 자세한 설명은 이곳에 적습니다.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: ""
-      summary: 써머리를 직접 수정했습니다
   /v1/param/{test}/{action}:
     get:
       consumes:
@@ -126,17 +74,6 @@ paths:
         name: action
         required: true
         type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: ""
-      summary: 써머리를 직접 수정했습니다
-  /v1/signup:
-    post:
-      consumes:
-      - application/json
-      description: 자세한 설명은 이곳에 적습니다.
       produces:
       - application/json
       responses:
