@@ -40,11 +40,10 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
-	docs.SwaggerInfo.Title = "NotificationHandler API"
-	docs.SwaggerInfo.Description = "This is a sample server for Swagger."
+	docs.SwaggerInfo.Title = "NotifyHandler API"
+	docs.SwaggerInfo.Description = "This is a service want notify something."
 	docs.SwaggerInfo.Version = "1.0"
 	docs.SwaggerInfo.Host = "localhost:8080/"
-	//docs.SwaggerInfo.BasePath = "v1"
 
 	router := gin.New()
 	router.Use(gzip.Gzip(gzip.DefaultCompression))
