@@ -1,14 +1,8 @@
 definitions:
-  model.MailContent:
-    properties:
-      text:
-        example: content text in notify mail
-        type: string
-    type: object
   model.STNotifyMail:
     properties:
       content:
-        $ref: '#/definitions/model.MailContent'
+        $ref: '#/definitions/model.mailContent'
       from:
         example: from-id
         type: string
@@ -25,6 +19,12 @@ definitions:
     - from
     - title
     - to
+    type: object
+  model.mailContent:
+    properties:
+      text:
+        example: content text in notify mail
+        type: string
     type: object
 info:
   contact: {}

@@ -103,15 +103,6 @@ var doc = `{
         }
     },
     "definitions": {
-        "model.MailContent": {
-            "type": "object",
-            "properties": {
-                "text": {
-                    "type": "string",
-                    "example": "content text in notify mail"
-                }
-            }
-        },
         "model.STNotifyMail": {
             "type": "object",
             "required": [
@@ -121,7 +112,7 @@ var doc = `{
             ],
             "properties": {
                 "content": {
-                    "$ref": "#/definitions/model.MailContent"
+                    "$ref": "#/definitions/model.mailContent"
                 },
                 "from": {
                     "type": "string",
@@ -139,6 +130,15 @@ var doc = `{
                     "example": [
                         "to-destination"
                     ]
+                }
+            }
+        },
+        "model.mailContent": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "example": "content text in notify mail"
                 }
             }
         }
