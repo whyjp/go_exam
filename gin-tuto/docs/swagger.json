@@ -38,7 +38,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.STNotifyMail"
+                            "$ref": "#/definitions/model.StNotifyMail"
                         }
                     }
                 ],
@@ -84,7 +84,7 @@
         }
     },
     "definitions": {
-        "model.STNotifyMail": {
+        "model.StNotifyMail": {
             "type": "object",
             "required": [
                 "from",
@@ -93,7 +93,7 @@
             ],
             "properties": {
                 "content": {
-                    "$ref": "#/definitions/model.mailContent"
+                    "$ref": "#/definitions/model.stmailContent"
                 },
                 "from": {
                     "type": "string",
@@ -114,7 +114,7 @@
                 }
             }
         },
-        "model.mailContent": {
+        "model.stmailContent": {
             "type": "object",
             "properties": {
                 "text": {

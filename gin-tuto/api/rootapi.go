@@ -51,11 +51,11 @@ func Param(c *gin.Context) {
 // @name get-string-by-int
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.STNotifyMail true "post jsonmail for test"
+// @Param  jsonbody body model.StNotifyMail true "post jsonmail for test"
 // @Router /v1/jsonMailTest [POST]
 // @Success 200
 func JsonMailTest(c *gin.Context) {
-	var jsonMail model.STNotifyMail
+	var jsonMail model.StNotifyMail
 	if err := c.ShouldBindJSON(&jsonMail); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -100,9 +100,16 @@ func JsonMailTest(c *gin.Context) {
 	fmt.Println("  RequestAttempt:", ti.RequestAttempt)
 	//fmt.Println("  RemoteAddr    :", ti.RemoteAddr.String())
 
-	c.JSON(resp.StatusCode(), gin.H{
-		"status": "you are post put json",
-		"body":   jsonMail,
-		"err":    err,
-	})
+	var result model.StResponse
+	result.Status = int64(resp.StatusCode())
+	result.Detail = "alert has sent by alert server"
+	result.Title = "alert has sent"
+	result.Instance = c.FullPath()
+
+	c.JSON(resp.StatusCode(), result)
+	/* gin.H{
+		"message": "you are post put json",
+		"body":    jsonMail,
+		"err":     err,
+	}) */
 }

@@ -1,8 +1,8 @@
 definitions:
-  model.STNotifyMail:
+  model.StNotifyMail:
     properties:
       content:
-        $ref: '#/definitions/model.mailContent'
+        $ref: '#/definitions/model.stmailContent'
       from:
         example: from-id
         type: string
@@ -20,7 +20,7 @@ definitions:
     - title
     - to
     type: object
-  model.mailContent:
+  model.stmailContent:
     properties:
       text:
         example: content text in notify mail
@@ -51,7 +51,7 @@ paths:
         name: jsonbody
         required: true
         schema:
-          $ref: '#/definitions/model.STNotifyMail'
+          $ref: '#/definitions/model.StNotifyMail'
       produces:
       - application/json
       responses:
