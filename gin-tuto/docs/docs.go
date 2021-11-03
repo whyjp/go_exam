@@ -204,7 +204,6 @@ var doc = `{
         "model.StPublicProducerMail": {
             "type": "object",
             "required": [
-                "cc",
                 "content",
                 "from",
                 "producer",

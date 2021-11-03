@@ -10,7 +10,7 @@ type stPublicProducer struct {
 type StPublicProducerMail struct {
 	stPublicProducer
 	To []string `json:"to" binding:"required" example:""`
-	Cc []string `json:"cc" binding:"required" example:""`
+	Cc []string `json:"cc" example:""`
 }
 type StPublicProducerTeams struct {
 	stPublicProducer

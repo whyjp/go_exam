@@ -50,7 +50,6 @@ definitions:
           type: string
         type: array
     required:
-    - cc
     - content
     - from
     - producer
