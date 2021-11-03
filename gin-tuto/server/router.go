@@ -15,14 +15,14 @@ import (
 	"webzen.com/notifyhandler/docs"
 )
 
-// @title Swagger Example API
+// @title Webzen NotifyHandler server
 // @version 1.0
-// @description This is a sample server Petstore server.
+// @description service based notifyhandler server it use external endpoint notify server
 // @termsOfService http://swagger.io/terms/
 
 // @contact.name API Support
 // @contact.url http://www.swagger.io/support
-// @contact.email support@swagger.io
+// @contact.email youngjoopark@webzen.com
 
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
@@ -51,15 +51,24 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 	router.Use(gin.ErrorLogger())
 	router.Use(gin.Recovery())
 
-	//router := gin.Default()
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	v1 := router.Group("/v1")
 	{
 		healthroot := new(api.HealthController)
 		router.GET("/health", healthroot.Status)
-		v1.GET("/param/:test/*action", api.Param)
-		v1.POST("/jsonMailTest", api.JsonMailTest)
+		publicRouter := v1.Group("public")
+		{
+			pub := new(api.Public)
+			publicRouter.POST("/mail", pub.MailHandler)
+			publicRouter.POST("/teams", pub.TeamsHandler)
+		}
+		grafanaRouter := v1.Group("grafana")
+		{
+			grafana := new(api.Grafana)
+			grafanaRouter.POST("/mail", grafana.MailHandler)
+			grafanaRouter.POST("/teams", grafana.TeamsHandler)
+		}
 	}
 	return router
 }

@@ -25,7 +25,7 @@ var doc = `{
     "paths": {
         "/health": {
             "get": {
-                "description": "자세한 설명은 이곳에 적습니다.",
+                "description": "notifyhandler server heath check",
                 "consumes": [
                     "application/json"
                 ],
@@ -40,7 +40,7 @@ var doc = `{
                 }
             }
         },
-        "/v1/jsonMailTest": {
+        "/v1/grafana/mail": {
             "post": {
                 "description": "자세한 설명은 이곳에 적습니다.",
                 "consumes": [
@@ -49,15 +49,15 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
-                "summary": "jsonparam binding test",
+                "summary": "Grafana mail api  : have just post api",
                 "parameters": [
                     {
-                        "description": "post jsonmail for test",
+                        "description": "json struct for send mail",
                         "name": "jsonbody",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.StNotifyMail"
+                            "$ref": "#/definitions/model.StGrafanaAlert"
                         }
                     }
                 ],
@@ -68,8 +68,8 @@ var doc = `{
                 }
             }
         },
-        "/v1/param/{test}/{action}": {
-            "get": {
+        "/v1/grafana/teams": {
+            "post": {
                 "description": "자세한 설명은 이곳에 적습니다.",
                 "consumes": [
                     "application/json"
@@ -77,21 +77,72 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
-                "summary": "써머리를 직접 수정했습니다",
+                "summary": "Grafana teams api  : have just post api",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "test",
-                        "name": "test",
-                        "in": "path",
-                        "required": true
-                    },
+                        "description": "json struct for send teams",
+                        "name": "jsonbody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.StGrafanaAlert"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/v1/public/mail": {
+            "post": {
+                "description": "자세한 설명은 이곳에 적습니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "public mail api  : have just post api",
+                "parameters": [
                     {
-                        "type": "string",
-                        "description": "action",
-                        "name": "action",
-                        "in": "path",
-                        "required": true
+                        "description": "json struct for send mail",
+                        "name": "jsonbody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.StPublicProducerMail"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/v1/public/teams": {
+            "post": {
+                "description": "자세한 설명은 이곳에 적습니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Grafana teams api  : have just post api",
+                "parameters": [
+                    {
+                        "description": "json struct for send teams",
+                        "name": "jsonbody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.StPublicProducerTeams"
+                        }
                     }
                 ],
                 "responses": {
@@ -103,44 +154,136 @@ var doc = `{
         }
     },
     "definitions": {
-        "model.StNotifyMail": {
+        "model.StGrafanaAlert": {
+            "type": "object",
+            "properties": {
+                "dashboardId": {
+                    "type": "integer"
+                },
+                "evalMatches": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.stEvalMatch"
+                    }
+                },
+                "imageUrl": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "orgId": {
+                    "type": "integer"
+                },
+                "panelId": {
+                    "type": "integer"
+                },
+                "ruleId": {
+                    "type": "integer"
+                },
+                "ruleName": {
+                    "type": "string"
+                },
+                "ruleUrl": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.StPublicProducerMail": {
             "type": "object",
             "required": [
+                "cc",
+                "content",
                 "from",
+                "producer",
                 "title",
                 "to"
             ],
             "properties": {
+                "cc": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "content": {
-                    "$ref": "#/definitions/model.stmailContent"
+                    "type": "string"
                 },
                 "from": {
+                    "type": "string"
+                },
+                "producer": {
                     "type": "string",
-                    "example": "from-id"
+                    "example": "wiss or wingo or kiss or more"
                 },
                 "title": {
-                    "type": "string",
-                    "example": "title"
+                    "type": "string"
                 },
                 "to": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    },
-                    "example": [
-                        "to-destination"
-                    ]
+                    }
                 }
             }
         },
-        "model.stmailContent": {
+        "model.StPublicProducerTeams": {
             "type": "object",
+            "required": [
+                "content",
+                "from",
+                "producer",
+                "title",
+                "touri"
+            ],
             "properties": {
-                "text": {
+                "content": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "producer": {
                     "type": "string",
-                    "example": "content text in notify mail"
+                    "example": "wiss or wingo or kiss or more"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "touri": {
+                    "type": "string",
+                    "example": "http://xxx.x.xx.xxx.x."
                 }
             }
+        },
+        "model.stEvalMatch": {
+            "type": "object",
+            "properties": {
+                "metric": {
+                    "type": "string"
+                },
+                "tags": {
+                    "$ref": "#/definitions/model.stEvalMatchTags"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.stEvalMatchTags": {
+            "type": "object"
         }
     }
 }`

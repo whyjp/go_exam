@@ -1,30 +1,93 @@
 definitions:
-  model.StNotifyMail:
+  model.StGrafanaAlert:
     properties:
+      dashboardId:
+        type: integer
+      evalMatches:
+        items:
+          $ref: '#/definitions/model.stEvalMatch'
+        type: array
+      imageUrl:
+        type: string
+      message:
+        type: string
+      orgId:
+        type: integer
+      panelId:
+        type: integer
+      ruleId:
+        type: integer
+      ruleName:
+        type: string
+      ruleUrl:
+        type: string
+      state:
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        type: object
+      title:
+        type: string
+    type: object
+  model.StPublicProducerMail:
+    properties:
+      cc:
+        items:
+          type: string
+        type: array
       content:
-        $ref: '#/definitions/model.stmailContent'
+        type: string
       from:
-        example: from-id
+        type: string
+      producer:
+        example: wiss or wingo or kiss or more
         type: string
       title:
-        example: title
         type: string
       to:
-        example:
-        - to-destination
         items:
           type: string
         type: array
     required:
+    - cc
+    - content
     - from
+    - producer
     - title
     - to
     type: object
-  model.stmailContent:
+  model.StPublicProducerTeams:
     properties:
-      text:
-        example: content text in notify mail
+      content:
         type: string
+      from:
+        type: string
+      producer:
+        example: wiss or wingo or kiss or more
+        type: string
+      title:
+        type: string
+      touri:
+        example: http://xxx.x.xx.xxx.x.
+        type: string
+    required:
+    - content
+    - from
+    - producer
+    - title
+    - touri
+    type: object
+  model.stEvalMatch:
+    properties:
+      metric:
+        type: string
+      tags:
+        $ref: '#/definitions/model.stEvalMatchTags'
+      value:
+        type: integer
+    type: object
+  model.stEvalMatchTags:
     type: object
 info:
   contact: {}
@@ -33,51 +96,83 @@ paths:
     get:
       consumes:
       - application/json
-      description: 자세한 설명은 이곳에 적습니다.
+      description: notifyhandler server heath check
       produces:
       - application/json
       responses:
         "200":
           description: ""
       summary: site health check is running will return "working!"
-  /v1/jsonMailTest:
+  /v1/grafana/mail:
     post:
       consumes:
       - application/json
       description: 자세한 설명은 이곳에 적습니다.
       parameters:
-      - description: post jsonmail for test
+      - description: json struct for send mail
         in: body
         name: jsonbody
         required: true
         schema:
-          $ref: '#/definitions/model.StNotifyMail'
+          $ref: '#/definitions/model.StGrafanaAlert'
       produces:
       - application/json
       responses:
         "200":
           description: ""
-      summary: jsonparam binding test
-  /v1/param/{test}/{action}:
-    get:
+      summary: 'Grafana mail api  : have just post api'
+  /v1/grafana/teams:
+    post:
       consumes:
       - application/json
       description: 자세한 설명은 이곳에 적습니다.
       parameters:
-      - description: test
-        in: path
-        name: test
+      - description: json struct for send teams
+        in: body
+        name: jsonbody
         required: true
-        type: string
-      - description: action
-        in: path
-        name: action
-        required: true
-        type: string
+        schema:
+          $ref: '#/definitions/model.StGrafanaAlert'
       produces:
       - application/json
       responses:
         "200":
           description: ""
-      summary: 써머리를 직접 수정했습니다
+      summary: 'Grafana teams api  : have just post api'
+  /v1/public/mail:
+    post:
+      consumes:
+      - application/json
+      description: 자세한 설명은 이곳에 적습니다.
+      parameters:
+      - description: json struct for send mail
+        in: body
+        name: jsonbody
+        required: true
+        schema:
+          $ref: '#/definitions/model.StPublicProducerMail'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 'public mail api  : have just post api'
+  /v1/public/teams:
+    post:
+      consumes:
+      - application/json
+      description: 자세한 설명은 이곳에 적습니다.
+      parameters:
+      - description: json struct for send teams
+        in: body
+        name: jsonbody
+        required: true
+        schema:
+          $ref: '#/definitions/model.StPublicProducerTeams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 'Grafana teams api  : have just post api'
 swagger: "2.0"
