@@ -1,14 +1,13 @@
 package api
 
 import (
-	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"webzen.com/notifyhandler/control"
 	"webzen.com/notifyhandler/model"
+	"webzen.com/notifyhandler/util"
 )
 
 type Grafana struct {
@@ -26,14 +25,14 @@ type Grafana struct {
 func (p Grafana) MailHandler(c *gin.Context) {
 	var jsonGrafana model.StGrafanaAlert
 	if err := c.BindJSON(&jsonGrafana); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
 	}
 
-	data, _ := json.Marshal(jsonGrafana)
-	fmt.Printf("%s \n", data)
+	util.StructPrintToJson(jsonGrafana)
+
 	var jsonMail model.StNotifyMail
-	fmt.Println(jsonMail)
+	util.StructPrintToJson(jsonMail)
 
 	resp, _ := control.SendMail(&jsonMail)
 
@@ -56,14 +55,14 @@ func (p Grafana) MailHandler(c *gin.Context) {
 func (p Grafana) TeamsHandler(c *gin.Context) {
 	var jsonGrafana model.StGrafanaAlert
 	if err := c.BindJSON(&jsonGrafana); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
 	}
 
-	data, _ := json.Marshal(jsonGrafana)
-	fmt.Printf("%s \n", data)
+	util.StructPrintToJson(jsonGrafana)
+
 	var jsonTeams model.StNotifyTeams
-	fmt.Println(jsonTeams)
+	util.StructPrintToJson(jsonTeams)
 
 	resp, _ := control.SendTeams(&jsonTeams)
 

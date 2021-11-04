@@ -1,14 +1,13 @@
 package api
 
 import (
-	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"webzen.com/notifyhandler/control"
 	"webzen.com/notifyhandler/model"
+	"webzen.com/notifyhandler/util"
 )
 
 type Universal struct {
@@ -26,14 +25,14 @@ type Universal struct {
 func (p Universal) MailHandler(c *gin.Context) {
 	var jsonPublicMail model.StUniversalProducerMail
 	if err := c.ShouldBindJSON(&jsonPublicMail); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
 	}
 
-	data, _ := json.Marshal(jsonPublicMail)
-	fmt.Printf("%s \n", data)
+	util.StructPrintToJson(jsonPublicMail)
+
 	var jsonMail model.StNotifyMail
-	fmt.Println(jsonMail)
+	util.StructPrintToJson(jsonMail)
 
 	resp, errSended := control.SendMail(&jsonMail)
 	if errSended != nil {
@@ -61,14 +60,14 @@ func (p Universal) MailHandler(c *gin.Context) {
 func (p Universal) TeamsHandler(c *gin.Context) {
 	var jsonPublicTeams model.StUniversalProducerTeams
 	if err := c.ShouldBindJSON(&jsonPublicTeams); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
 	}
 
-	data, _ := json.Marshal(jsonPublicTeams)
-	fmt.Printf("%s \n", data)
+	util.StructPrintToJson(jsonPublicTeams)
+
 	var jsonTeams model.StNotifyTeams
-	fmt.Println(jsonTeams)
+	util.StructPrintToJson(jsonTeams)
 
 	resp, errSended := control.SendTeams(&jsonTeams)
 	if errSended != nil {
