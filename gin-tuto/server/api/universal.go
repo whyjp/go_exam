@@ -39,13 +39,14 @@ func (p Universal) MailHandler(c *gin.Context) {
 	if errSended != nil {
 		log.Println(errSended)
 	}
-	log.Println("resp", resp)
-	c.Set("responseCode", resp.StatusCode())
-	errResp := control.Responser.RaiseResponse(c)
-	if errResp != nil {
-		log.Println("raise error", errResp)
+	if resp != nil {
+		log.Println("resp", resp)
+		c.Set("responseCode", resp.StatusCode())
+		errResp := control.Responser.RaiseResponse(c)
+		if errResp != nil {
+			log.Println("raise error", errResp)
+		}
 	}
-
 }
 
 // Welcome godoc
@@ -69,10 +70,16 @@ func (p Universal) TeamsHandler(c *gin.Context) {
 	var jsonTeams model.StNotifyTeams
 	fmt.Println(jsonTeams)
 
-	resp, _ := control.SendTeams(&jsonTeams)
-	c.Set("responseCode", resp.StatusCode())
-	errResp := control.Responser.RaiseResponse(c)
-	if errResp != nil {
-		log.Println("raise error", errResp)
+	resp, errSended := control.SendTeams(&jsonTeams)
+	if errSended != nil {
+		log.Println(errSended)
+	}
+	if resp != nil {
+		log.Println("resp", resp)
+		c.Set("responseCode", resp.StatusCode())
+		errResp := control.Responser.RaiseResponse(c)
+		if errResp != nil {
+			log.Println("raise error", errResp)
+		}
 	}
 }

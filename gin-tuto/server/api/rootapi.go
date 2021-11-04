@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -18,7 +17,6 @@ type HealthController struct{}
 // @Router /health [get]
 // @Success 200
 func (h HealthController) Status(c *gin.Context) {
-	fmt.Println("Statusstatus called")
 	c.Set("r_title", "working!")
 	c.String(http.StatusOK, "Working!")
 }

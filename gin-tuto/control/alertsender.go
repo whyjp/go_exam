@@ -1,6 +1,7 @@
 package control
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -15,13 +16,32 @@ type AuthSuccess struct {
 type AuthError struct {
 }
 
+type Error struct {
+	Code    string `json:"error_code,omitempty"`
+	Message string `json:"error_message,omitempty"`
+}
+
+func getAPIError(resp *resty.Response) error {
+	apiError := resp.Error().(*Error)
+	return fmt.Errorf("request failed [%s]: %s", apiError.Code, apiError.Message)
+}
+
 func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
 	client := resty.New()
+	client.SetTimeout(1 * time.Minute)
+
 	resp, err := client.R().
 		SetBody(jsonTeams).
 		SetResult(AuthSuccess{}). // or SetResult(AuthSuccess{}).
 		SetError(&AuthError{}).   // or SetError(AuthError{}).
 		Post("http://10.105.33.38/alert/api/v2/teams")
+
+	if err != nil {
+		return nil, fmt.Errorf("send team to notify server failed: %s", err)
+	}
+	if resp.Error() != nil {
+		return nil, getAPIError(resp)
+	}
 
 	// Explore response object
 	log.Println("Response Info:")
@@ -62,7 +82,10 @@ func SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
 		Post("http://10.105.33.38/alert/api/v2/email")
 
 	if err != nil {
-		return resp, err
+		return nil, fmt.Errorf("send mail to notify server failed: %s", err)
+	}
+	if resp.Error() != nil {
+		return nil, getAPIError(resp)
 	}
 	// Explore response object
 	log.Println("Response Info:")
