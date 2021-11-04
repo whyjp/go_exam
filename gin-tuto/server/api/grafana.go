@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -36,9 +37,11 @@ func (p Grafana) MailHandler(c *gin.Context) {
 
 	resp, _ := control.SendMail(&jsonMail)
 
-	result, _ := control.Responser.MakeResponse(resp.StatusCode(), c) // model.StResponse
-
-	c.JSON(resp.StatusCode(), result)
+	c.Set("responseCode", resp.StatusCode())
+	errResp := control.Responser.RaiseResponse(c)
+	if errResp != nil {
+		log.Println("raise error", errResp)
+	}
 }
 
 // Welcome godoc
@@ -64,7 +67,9 @@ func (p Grafana) TeamsHandler(c *gin.Context) {
 
 	resp, _ := control.SendTeams(&jsonTeams)
 
-	result, _ := control.Responser.MakeResponse(resp.StatusCode(), c) // model.StResponse
-
-	c.JSON(resp.StatusCode(), result)
+	c.Set("responseCode", resp.StatusCode())
+	errResp := control.Responser.RaiseResponse(c)
+	if errResp != nil {
+		log.Println("raise error", errResp)
+	}
 }

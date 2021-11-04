@@ -1,6 +1,9 @@
 package control
 
 import (
+	"errors"
+	"log"
+
 	"github.com/gin-gonic/gin"
 	"webzen.com/notifyhandler/model"
 )
@@ -10,14 +13,22 @@ type StResponser struct {
 
 var Responser StResponser
 
-func (s StResponser) MakeResponse(statusCode int, c *gin.Context) (*model.StResponse, error) {
+func (s StResponser) RaiseResponse(c *gin.Context) error {
 	var resp *model.StResponse
 
-	resp.Type = "OK"
-	resp.Status = int64(statusCode)
-	resp.Detail = "alert has sent by alert server"
-	resp.Title = "alert has sent"
-	resp.Instance = c.FullPath()
+	log.Println("in raise response")
+	statusCode, exist := c.Get("responseCode")
+	if exist != false {
+		log.Println("exist responseCode", statusCode.(int))
+		resp.Type = "OK"
+		resp.Status = int64(statusCode.(int))
+		resp.Detail = "alert has sent by alert server"
+		resp.Title = "alert has sent"
+		resp.Instance = c.FullPath()
 
-	return resp, nil
+		c.JSON(statusCode.(int), resp)
+
+		return nil
+	}
+	return errors.New("code not insert gin context")
 }

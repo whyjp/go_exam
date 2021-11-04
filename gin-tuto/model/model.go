@@ -1,19 +1,14 @@
 package model
 
 type stNotifyCommon struct {
-	From  string   `json:"from" binding:"required" example:"from-id"`
-	To    []string `json:"to" binding:"required" example:"to-destination"`
-	Title string   `json:"title" binding:"required" example:"title"`
+	From  string `json:"from" binding:"required" example:"from-id"`
+	Title string `json:"title" binding:"required" example:"title"`
 }
-type stNotifyCommonEx struct {
-	Producer  string   `json:"producer" binding:"required" example:"wiss or wingo or kiss or more"`
-	Tag       []string `json:"tag" binding:"required" example:"MU,SOGB,"`
-	Region    string   `json:"region" example:"empty(Don't Care) or KR/GP/JP/SEA"`
-	ForceSend bool     `json:"ignorefilter" default:"false" example:"bool = ture,false 알림 필터를 무시 force send"`
-	stNotifyCommon
-}
+
 type StNotifyMail struct {
 	stNotifyCommon
+	To      string        `json:"to" binding:"required" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
+	Cc      string        `json:"cc" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
 	Content stmailContent `json:"content"`
 }
 type stmailContent struct {
@@ -22,6 +17,7 @@ type stmailContent struct {
 
 type StNotifyTeams struct {
 	stNotifyCommon
+	Touri   string         `json:"touri" binding:"required" example:"http://xxx.x.xx.xxx.x."`
 	Content stteamsContent `json:"content"`
 }
 type stteamsContent struct {

@@ -11,8 +11,8 @@ import (
 	"github.com/spf13/viper"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"webzen.com/notifyhandler/api"
 	"webzen.com/notifyhandler/docs"
+	"webzen.com/notifyhandler/server/api"
 )
 
 // @title Webzen NotifyHandler server
@@ -41,7 +41,7 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	docs.SwaggerInfo.Title = "NotifyHandler API"
-	docs.SwaggerInfo.Description = "This is a service want notify something."
+	docs.SwaggerInfo.Description = "This service is used to notify and notify managing."
 	docs.SwaggerInfo.Version = "1.0"
 	docs.SwaggerInfo.Host = "localhost:8080/"
 

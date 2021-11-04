@@ -2,14 +2,14 @@ package control
 
 import (
 	"log"
+	"time"
 
 	"github.com/go-resty/resty/v2"
 	"webzen.com/notifyhandler/model"
 )
 
-type StAlertSender struct {
+type StNotifySender struct {
 }
-
 type AuthSuccess struct {
 }
 type AuthError struct {
@@ -53,12 +53,17 @@ func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
 
 func SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
 	client := resty.New()
+	client.SetTimeout(1 * time.Minute)
+
 	resp, err := client.R().
 		SetBody(jsonMail).
 		SetResult(AuthSuccess{}). // or SetResult(AuthSuccess{}).
 		SetError(&AuthError{}).   // or SetError(AuthError{}).
 		Post("http://10.105.33.38/alert/api/v2/email")
 
+	if err != nil {
+		return resp, err
+	}
 	// Explore response object
 	log.Println("Response Info:")
 	log.Println("  Error      :", err)

@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -34,11 +35,17 @@ func (p Universal) MailHandler(c *gin.Context) {
 	var jsonMail model.StNotifyMail
 	fmt.Println(jsonMail)
 
-	resp, _ := control.SendMail(&jsonMail)
+	resp, errSended := control.SendMail(&jsonMail)
+	if errSended != nil {
+		log.Println(errSended)
+	}
+	log.Println("resp", resp)
+	c.Set("responseCode", resp.StatusCode())
+	errResp := control.Responser.RaiseResponse(c)
+	if errResp != nil {
+		log.Println("raise error", errResp)
+	}
 
-	result, _ := control.Responser.MakeResponse(resp.StatusCode(), c) // model.StResponse
-
-	c.JSON(resp.StatusCode(), result)
 }
 
 // Welcome godoc
@@ -63,8 +70,9 @@ func (p Universal) TeamsHandler(c *gin.Context) {
 	fmt.Println(jsonTeams)
 
 	resp, _ := control.SendTeams(&jsonTeams)
-
-	result, _ := control.Responser.MakeResponse(resp.StatusCode(), c) // model.StResponse
-
-	c.JSON(resp.StatusCode(), result)
+	c.Set("responseCode", resp.StatusCode())
+	errResp := control.Responser.RaiseResponse(c)
+	if errResp != nil {
+		log.Println("raise error", errResp)
+	}
 }
