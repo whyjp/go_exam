@@ -96,16 +96,16 @@ var doc = `{
                 }
             }
         },
-        "/v1/public/mail": {
+        "/v1/mail": {
             "post": {
-                "description": "자세한 설명은 이곳에 적습니다.",
+                "description": "universal notify api for mail",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "public mail api  : have just post api",
+                "summary": "universal mail api  : have just post api",
                 "parameters": [
                     {
                         "description": "json struct for send mail",
@@ -113,7 +113,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.StPublicProducerMail"
+                            "$ref": "#/definitions/model.StUniversalProducerMail"
                         }
                     }
                 ],
@@ -124,9 +124,9 @@ var doc = `{
                 }
             }
         },
-        "/v1/public/teams": {
+        "/v1/teams": {
             "post": {
-                "description": "자세한 설명은 이곳에 적습니다.",
+                "description": "universal notify api for teams",
                 "consumes": [
                     "application/json"
                 ],
@@ -141,7 +141,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.StPublicProducerTeams"
+                            "$ref": "#/definitions/model.StUniversalProducerTeams"
                         }
                     }
                 ],
@@ -201,7 +201,7 @@ var doc = `{
                 }
             }
         },
-        "model.StPublicProducerMail": {
+        "model.StUniversalProducerMail": {
             "type": "object",
             "required": [
                 "content",
@@ -212,10 +212,8 @@ var doc = `{
             ],
             "properties": {
                 "cc": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string",
+                    "example": "xxx@yyyy.com;yyy@xxxx.co.kr"
                 },
                 "content": {
                     "type": "string"
@@ -227,18 +225,25 @@ var doc = `{
                     "type": "string",
                     "example": "wiss or wingo or kiss or more"
                 },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "example": {
+                        "game": "#MUA2"
+                    }
+                },
                 "title": {
                     "type": "string"
                 },
                 "to": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "type": "string",
+                    "example": "xxx@yyyy.com;yyy@xxxx.co.kr"
                 }
             }
         },
-        "model.StPublicProducerTeams": {
+        "model.StUniversalProducerTeams": {
             "type": "object",
             "required": [
                 "content",
@@ -257,6 +262,15 @@ var doc = `{
                 "producer": {
                     "type": "string",
                     "example": "wiss or wingo or kiss or more"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "example": {
+                        "game": "#MUA2"
+                    }
                 },
                 "title": {
                     "type": "string"

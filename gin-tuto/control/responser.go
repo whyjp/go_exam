@@ -10,7 +10,7 @@ type StResponser struct {
 
 var Responser StResponser
 
-func (s StResponser) GetResult(statusCode int, c *gin.Context) (*model.StResponse, error) {
+func (s StResponser) MakeResponse(statusCode int, c *gin.Context) (*model.StResponse, error) {
 	var resp *model.StResponse
 
 	resp.Type = "OK"

@@ -10,20 +10,20 @@ import (
 	"webzen.com/notifyhandler/model"
 )
 
-type Public struct {
+type Universal struct {
 }
 
 // Welcome godoc
-// @Summary public mail api  : have just post api
-// @Description 자세한 설명은 이곳에 적습니다.
+// @Summary universal mail api  : have just post api
+// @Description universal notify api for mail
 // @name get-string-by-int
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.StPublicProducerMail true "json struct for send mail"
-// @Router /v1/public/mail [POST]
+// @Param  jsonbody body model.StUniversalProducerMail true "json struct for send mail"
+// @Router /v1/mail [POST]
 // @Success 200
-func (p Public) MailHandler(c *gin.Context) {
-	var jsonPublicMail model.StPublicProducerMail
+func (p Universal) MailHandler(c *gin.Context) {
+	var jsonPublicMail model.StUniversalProducerMail
 	if err := c.ShouldBindJSON(&jsonPublicMail); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -36,22 +36,22 @@ func (p Public) MailHandler(c *gin.Context) {
 
 	resp, _ := control.SendMail(&jsonMail)
 
-	result, _ := control.Responser.GetResult(resp.StatusCode(), c) // model.StResponse
+	result, _ := control.Responser.MakeResponse(resp.StatusCode(), c) // model.StResponse
 
 	c.JSON(resp.StatusCode(), result)
 }
 
 // Welcome godoc
 // @Summary Grafana teams api  : have just post api
-// @Description 자세한 설명은 이곳에 적습니다.
+// @Description universal notify api for teams
 // @name get-string-by-int
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.StPublicProducerTeams true "json struct for send teams"
-// @Router /v1/public/teams [POST]
+// @Param  jsonbody body model.StUniversalProducerTeams true "json struct for send teams"
+// @Router /v1/teams [POST]
 // @Success 200
-func (p Public) TeamsHandler(c *gin.Context) {
-	var jsonPublicTeams model.StPublicProducerTeams
+func (p Universal) TeamsHandler(c *gin.Context) {
+	var jsonPublicTeams model.StUniversalProducerTeams
 	if err := c.ShouldBindJSON(&jsonPublicTeams); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -64,7 +64,7 @@ func (p Public) TeamsHandler(c *gin.Context) {
 
 	resp, _ := control.SendTeams(&jsonTeams)
 
-	result, _ := control.Responser.GetResult(resp.StatusCode(), c) // model.StResponse
+	result, _ := control.Responser.MakeResponse(resp.StatusCode(), c) // model.StResponse
 
 	c.JSON(resp.StatusCode(), result)
 }

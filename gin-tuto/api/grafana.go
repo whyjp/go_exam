@@ -36,7 +36,7 @@ func (p Grafana) MailHandler(c *gin.Context) {
 
 	resp, _ := control.SendMail(&jsonMail)
 
-	result, _ := control.Responser.GetResult(resp.StatusCode(), c) // model.StResponse
+	result, _ := control.Responser.MakeResponse(resp.StatusCode(), c) // model.StResponse
 
 	c.JSON(resp.StatusCode(), result)
 }
@@ -64,7 +64,7 @@ func (p Grafana) TeamsHandler(c *gin.Context) {
 
 	resp, _ := control.SendTeams(&jsonTeams)
 
-	result, _ := control.Responser.GetResult(resp.StatusCode(), c) // model.StResponse
+	result, _ := control.Responser.MakeResponse(resp.StatusCode(), c) // model.StResponse
 
 	c.JSON(resp.StatusCode(), result)
 }

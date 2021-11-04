@@ -53,16 +53,14 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	healthroot := new(api.HealthController)
+	router.GET("/health", healthroot.Status)
 	v1 := router.Group("/v1")
 	{
-		healthroot := new(api.HealthController)
-		router.GET("/health", healthroot.Status)
-		publicRouter := v1.Group("public")
-		{
-			pub := new(api.Public)
-			publicRouter.POST("/mail", pub.MailHandler)
-			publicRouter.POST("/teams", pub.TeamsHandler)
-		}
+		pub := new(api.Universal)
+		v1.POST("/mail", pub.MailHandler)
+		v1.POST("/teams", pub.TeamsHandler)
+
 		grafanaRouter := v1.Group("grafana")
 		{
 			grafana := new(api.Grafana)
