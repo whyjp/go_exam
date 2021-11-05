@@ -37,6 +37,16 @@ func (s *StNotifyMail) SetFrom(from interface{}) (*StNotifyMail, error) {
 		case StGrafanaAlert:
 			s.Title = v.Title
 			s.Content.Text = v.Message
+			to, exist := v.Tags["To"]
+			if exist {
+				s.To = util.StringsToArray(to)
+			} else {
+				return nil, errors.New("to tag not found in grafana alert struct mail destination requeied to tag")
+			}
+			cc, exist := v.Tags["Cc"]
+			if exist {
+				s.Cc = util.StringsToArray(cc)
+			}
 			return s, nil
 		case StUniversalProducerMail:
 			s.Title = v.Title
