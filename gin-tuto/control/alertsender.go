@@ -39,9 +39,9 @@ func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
 	if err != nil {
 		return nil, fmt.Errorf("send team to notify server failed: %s", err)
 	}
-	if resp.Error() != nil {
-		return nil, getAPIError(resp)
-	}
+	// if resp.Error() != nil {
+	// 	return nil, getAPIError(resp)
+	// }
 
 	// Explore response object
 	log.Println("Response Info:")
@@ -73,7 +73,7 @@ func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
 
 func SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
 	client := resty.New()
-	client.SetTimeout(1 * time.Minute)
+	//client.SetTimeout(1 * time.Minute)
 
 	resp, err := client.R().
 		SetBody(jsonMail).
@@ -84,9 +84,11 @@ func SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
 	if err != nil {
 		return nil, fmt.Errorf("send mail to notify server failed: %s", err)
 	}
-	if resp.Error() != nil {
-		return nil, getAPIError(resp)
-	}
+	// if resp.Error() != nil {
+	// 	return nil, getAPIError(resp)
+	// }
+	log.Println("request ends")
+
 	// Explore response object
 	log.Println("Response Info:")
 	log.Println("  Error      :", err)

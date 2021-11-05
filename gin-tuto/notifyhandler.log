@@ -2087,3 +2087,283 @@
 [GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
 [GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
 [GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/05 - 10:25:14 | 200 |      2.8237ms |       127.0.0.1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 10:25:14 | 200 |     10.2278ms |       127.0.0.1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 10:25:14 | 200 |     22.6128ms |       127.0.0.1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 10:25:14 | 200 |     65.4512ms |       127.0.0.1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 10:25:14 | 200 |            0s |       127.0.0.1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/05 - 14:19:32 | 200 |       987.7µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 14:19:32 | 304 |       997.1µs |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 14:19:32 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 14:19:32 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 14:19:32 | 200 |       997.3µs |             ::1 | GET      "/swagger/doc.json"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/05 - 16:57:13 | 200 |       540.6µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 16:57:13 | 200 |      2.3981ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 16:57:13 | 200 |     27.0865ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 16:57:13 | 200 |      71.491ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 16:57:13 | 200 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/05 - 16:57:13 | 200 |     78.7431ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/05 - 16:59:03 | 200 |      1.0253ms |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 16:59:03 | 200 |     12.4262ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 16:59:03 | 200 |     34.7742ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 16:59:03 | 200 |     90.6165ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 16:59:03 | 200 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/05 - 16:59:03 | 200 |     90.4021ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2021/11/05 - 17:01:46 | 200 |    4.8464418s |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:01:46 | 200 |       504.5µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:01:55 | 200 |       969.5µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:01:55 | 200 |    7.3706987s |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:01:55 | 200 |       2.645ms |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:01:55 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 17:01:55 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 17:01:55 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 17:01:55 | 200 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/05 - 17:01:55 | 304 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2021/11/05 - 17:02:11 | 200 |            0s |             ::1 | GET      "/health"
+[GIN] 2021/11/05 - 17:02:55 | 200 |            0s |             ::1 | GET      "/health"
+[GIN] 2021/11/05 - 17:03:10 | 500 |     34.8004ms |             ::1 | POST     "/v1/teams"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/05 - 17:05:00 | 200 |       582.8µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:05:00 | 200 |      4.7307ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 17:05:00 | 200 |      42.532ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 17:05:00 | 200 |     64.8638ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 17:05:00 | 200 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/05 - 17:05:01 | 200 |     85.7669ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/05 - 17:06:08 | 200 |      1.1107ms |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:06:08 | 200 |      12.801ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 17:06:08 | 200 |     24.8102ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 17:06:08 | 200 |     67.1691ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 17:06:09 | 200 |       427.6µs |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/05 - 17:06:09 | 200 |     75.9455ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2021/11/05 - 17:06:13 | 200 |            0s |             ::1 | GET      "/health"
+[GIN] 2021/11/05 - 17:06:38 | 500 |     33.0538ms |             ::1 | POST     "/v1/mail"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/05 - 17:15:07 | 200 |      1.2559ms |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:15:07 | 200 |      3.2491ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 17:15:07 | 200 |     33.0757ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 17:15:07 | 200 |     63.5062ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 17:15:07 | 200 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/05 - 17:15:07 | 200 |      81.473ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/05 - 17:29:58 | 500 |        11m53s |             ::1 | POST     "/v1/mail"
+[GIN] 2021/11/05 - 17:30:27 | 200 |      4.2204ms |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:30:28 | 200 |     11.6332ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 17:30:28 | 200 |     38.4703ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 17:30:28 | 200 |      96.273ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 17:30:28 | 200 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/05 - 17:30:28 | 200 |     82.2087ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2021/11/05 - 17:30:38 | 500 |     26.23951s |             ::1 | POST     "/v1/mail"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/05 - 17:31:52 | 200 |      1.0717ms |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/05 - 17:31:52 | 200 |      8.0939ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/05 - 17:31:52 | 200 |     33.6759ms |       127.0.0.1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/05 - 17:31:52 | 200 |     97.2422ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/05 - 17:31:52 | 200 |       997.7µs |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/05 - 17:31:52 | 200 |     91.3571ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2021/11/05 - 17:33:59 | 500 |          2m0s |             ::1 | POST     "/v1/mail"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /v1/mail                  --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/teams                 --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/mail          --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (5 handlers)
+[GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/05 - 17:35:15 | 500 |   16.7059262s |             ::1 | POST     "/v1/mail"

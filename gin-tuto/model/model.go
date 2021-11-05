@@ -3,6 +3,8 @@ package model
 import (
 	"errors"
 	"reflect"
+
+	"webzen.com/notifyhandler/util"
 )
 
 type stNotifyCommon struct {
@@ -12,8 +14,8 @@ type stNotifyCommon struct {
 
 type StNotifyMail struct {
 	stNotifyCommon
-	To      string        `json:"to" binding:"required" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
-	Cc      string        `json:"cc" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
+	To      []string      `json:"to" binding:"required" example:"{yyy@xxxx.co.kr, xxx@fasdf.com}"`
+	Cc      []string      `json:"cc" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
 	Content stmailContent `json:"content"`
 }
 type stmailContent struct {
@@ -40,8 +42,8 @@ func (s *StNotifyMail) SetFrom(from interface{}) (*StNotifyMail, error) {
 			s.Title = v.Title
 			s.Content.Text = v.Content
 			s.From = v.From
-			s.To = v.To
-			s.Cc = v.Cc
+			s.To = util.StringsToArray(v.To)
+			s.Cc = util.StringsToArray(v.Cc)
 			return s, nil
 		}
 	}

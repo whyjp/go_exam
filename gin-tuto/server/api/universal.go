@@ -24,7 +24,7 @@ type Universal struct {
 // @Success 200
 func (p Universal) MailHandler(c *gin.Context) {
 	var jsonPublicMail model.StUniversalProducerMail
-	if err := c.ShouldBindJSON(&jsonPublicMail); err != nil {
+	if err := c.BindJSON(&jsonPublicMail); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
 	}
@@ -32,6 +32,11 @@ func (p Universal) MailHandler(c *gin.Context) {
 	util.StructPrintToJson(jsonPublicMail)
 
 	var jsonMail model.StNotifyMail
+	_, errMakeup := jsonMail.SetFrom(jsonPublicMail)
+	if errMakeup != nil {
+		log.Println("raise error", errMakeup)
+		return
+	}
 	util.StructPrintToJson(jsonMail)
 
 	resp, errSended := control.SendMail(&jsonMail)
@@ -59,7 +64,7 @@ func (p Universal) MailHandler(c *gin.Context) {
 // @Success 200
 func (p Universal) TeamsHandler(c *gin.Context) {
 	var jsonPublicTeams model.StUniversalProducerTeams
-	if err := c.ShouldBindJSON(&jsonPublicTeams); err != nil {
+	if err := c.BindJSON(&jsonPublicTeams); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
 	}
