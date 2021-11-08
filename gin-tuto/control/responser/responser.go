@@ -1,4 +1,4 @@
-package control
+package responser
 
 import (
 	"errors"
@@ -13,12 +13,12 @@ type StResponser struct {
 
 var Responser StResponser
 
-func (s StResponser) RaiseResponse(c *gin.Context) error {
+func RaiseResponse(c *gin.Context) error {
 	var resp model.StResponse
 
 	log.Println("in raise response")
 	statusCode, exist := c.Get("responseCode")
-	if exist != false {
+	if exist {
 		log.Println("exist responseCode", statusCode.(int))
 		resp.Type = "OK"
 		resp.Status = int64(statusCode.(int))
