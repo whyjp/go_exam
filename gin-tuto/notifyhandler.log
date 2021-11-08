@@ -2651,3 +2651,46 @@
 [GIN-debug] POST   /v1/grafana/teams         --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (6 handlers)
 [GIN-debug] Listening and serving HTTP on :8080
 [GIN] 2021/11/08 - 17:13:44 | 200 |    2.9833255s |             ::1 | POST     "/v1/mail"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /notify/mail              --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (6 handlers)
+[GIN-debug] POST   /notify/teams             --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (6 handlers)
+[GIN-debug] POST   /notify/grafana/mail      --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (6 handlers)
+[GIN-debug] POST   /notify/grafana/teams     --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (6 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/08 - 18:40:52 | 404 |            0s |             ::1 | POST     "/v1/mail"
+[GIN] 2021/11/08 - 18:41:01 | 200 |       510.3µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2021/11/08 - 18:41:01 | 200 |      3.6954ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2021/11/08 - 18:41:01 | 200 |     27.2513ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2021/11/08 - 18:41:01 | 200 |     70.0652ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2021/11/08 - 18:41:01 | 200 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2021/11/08 - 18:41:01 | 200 |     87.6176ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2021/11/08 - 18:41:07 | 500 |      6.4305ms |             ::1 | POST     "/notify/mail"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /notify/mail              --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (6 handlers)
+[GIN-debug] POST   /notify/teams             --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (6 handlers)
+[GIN-debug] POST   /notify/grafana/mail      --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (6 handlers)
+[GIN-debug] POST   /notify/grafana/teams     --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (6 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/08 - 18:42:19 | 500 |    3.2182471s |             ::1 | POST     "/notify/mail"
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+[GIN-debug] GET    /health                   --> webzen.com/notifyhandler/server/api.HealthController.Status-fm (5 handlers)
+[GIN-debug] POST   /notify/mail              --> webzen.com/notifyhandler/server/api.Universal.MailHandler-fm (6 handlers)
+[GIN-debug] POST   /notify/teams             --> webzen.com/notifyhandler/server/api.Universal.TeamsHandler-fm (6 handlers)
+[GIN-debug] POST   /notify/grafana/mail      --> webzen.com/notifyhandler/server/api.Grafana.MailHandler-fm (6 handlers)
+[GIN-debug] POST   /notify/grafana/teams     --> webzen.com/notifyhandler/server/api.Grafana.TeamsHandler-fm (6 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/08 - 18:43:53 | 200 |   12.5106227s |             ::1 | POST     "/notify/mail"

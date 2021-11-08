@@ -1,4 +1,4 @@
-package control
+package notifysender
 
 import (
 	"fmt"
@@ -12,12 +12,11 @@ import (
 
 const defaultBaseURL = "http://10.105.33.38"
 
-type NotifySender struct {
-	client *resty.Client
+var client *resty.Client
+
+type authSuccess struct {
 }
-type AuthSuccess struct {
-}
-type AuthError struct {
+type authError struct {
 }
 
 type Error struct {
@@ -25,8 +24,8 @@ type Error struct {
 	Message string `json:"error_message,omitempty"`
 }
 
-func NewStNotifySender() *NotifySender {
-	client := resty.New()
+func init() {
+	client = resty.New()
 	client.SetDebug(false)
 	client.SetTimeout(1 * time.Minute)
 	// Try getting Accounts API base URL from env var
@@ -37,8 +36,6 @@ func NewStNotifySender() *NotifySender {
 	client.SetHostURL(apiURL)
 	// Setting global error struct that maps to Form3's error response
 	client.SetError(&Error{})
-
-	return &NotifySender{client: client}
 }
 
 func getAPIError(resp *resty.Response) error {
@@ -46,11 +43,11 @@ func getAPIError(resp *resty.Response) error {
 	return fmt.Errorf("request failed [%s]: %s", apiError.Code, apiError.Message)
 }
 
-func (c *NotifySender) SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
-	resp, err := c.client.R().
+func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
+	resp, err := client.R().
 		SetBody(jsonTeams).
-		SetResult(AuthSuccess{}). // or SetResult(AuthSuccess{}).
-		SetError(&AuthError{}).   // or SetError(AuthError{}).
+		SetResult(authSuccess{}). // or SetResult(AuthSuccess{}).
+		SetError(&authError{}).   // or SetError(AuthError{}).
 		Post("/alert/api/v2/teams")
 
 	if err != nil {
@@ -88,11 +85,11 @@ func (c *NotifySender) SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Respons
 	return resp, nil
 }
 
-func (c *NotifySender) SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
-	resp, err := c.client.R().
+func SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
+	resp, err := client.R().
 		SetBody(jsonMail).
-		SetResult(AuthSuccess{}). // or SetResult(AuthSuccess{}).
-		SetError(&AuthError{}).   // or SetError(AuthError{}).
+		SetResult(authSuccess{}). // or SetResult(AuthSuccess{}).
+		SetError(&authError{}).   // or SetError(AuthError{}).
 		Post("/alert/api/v2/email")
 
 	if err != nil {

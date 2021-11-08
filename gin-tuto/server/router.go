@@ -56,14 +56,14 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 
 	healthroot := new(api.HealthController)
 	router.GET("/health", healthroot.Status)
-	v1 := router.Group("/v1")
-	v1.Use(responser)
+	notify := router.Group("/notify")
+	notify.Use(responser)
 	{
 		pub := new(api.Universal)
-		v1.POST("/mail", pub.MailHandler)
-		v1.POST("/teams", pub.TeamsHandler)
+		notify.POST("/mail", pub.MailHandler)
+		notify.POST("/teams", pub.TeamsHandler)
 
-		grafanaRouter := v1.Group("grafana")
+		grafanaRouter := notify.Group("grafana")
 		{
 			grafana := new(api.Grafana)
 			grafanaRouter.POST("/mail", grafana.MailHandler)

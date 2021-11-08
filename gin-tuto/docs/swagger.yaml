@@ -46,6 +46,7 @@ definitions:
         additionalProperties:
           type: string
         example:
+          ' region': KR
           game: '#MUA2'
         type: object
       title:
@@ -73,6 +74,7 @@ definitions:
         additionalProperties:
           type: string
         example:
+          ' region': KR
           game: '#MUA2'
         type: object
       title:
@@ -112,7 +114,7 @@ paths:
         "200":
           description: ""
       summary: site health check is running will return "working!"
-  /v1/grafana/mail:
+  /notify/grafana/mail:
     post:
       consumes:
       - application/json
@@ -130,7 +132,7 @@ paths:
         "200":
           description: ""
       summary: 'Grafana mail api  : have just post api'
-  /v1/grafana/teams:
+  /notify/grafana/teams:
     post:
       consumes:
       - application/json
@@ -148,7 +150,7 @@ paths:
         "200":
           description: ""
       summary: 'Grafana teams api  : have just post api'
-  /v1/mail:
+  /notify/mail:
     post:
       consumes:
       - application/json
@@ -166,7 +168,7 @@ paths:
         "200":
           description: ""
       summary: 'universal mail api  : have just post api'
-  /v1/teams:
+  /notify/teams:
     post:
       consumes:
       - application/json

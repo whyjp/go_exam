@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"webzen.com/notifyhandler/control"
+	"webzen.com/notifyhandler/control/notifysender"
 	"webzen.com/notifyhandler/model"
 	"webzen.com/notifyhandler/util"
 )
@@ -20,7 +20,7 @@ type Universal struct {
 // @Accept  json
 // @Produce  json
 // @Param  jsonbody body model.StUniversalProducerMail true "json struct for send mail"
-// @Router /v1/mail [POST]
+// @Router /notify/mail [POST]
 // @Success 200
 func (p Universal) MailHandler(c *gin.Context) {
 	var jsonPublicMail model.StUniversalProducerMail
@@ -40,8 +40,8 @@ func (p Universal) MailHandler(c *gin.Context) {
 		return
 	}
 	util.StructPrintToJson(jsonMail)
-	sender := control.NewStNotifySender()
-	resp, errSended := sender.SendMail(&jsonMail)
+
+	resp, errSended := notifysender.SendMail(&jsonMail)
 	if errSended != nil {
 		log.Println(errSended)
 	}
@@ -58,7 +58,7 @@ func (p Universal) MailHandler(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param  jsonbody body model.StUniversalProducerTeams true "json struct for send teams"
-// @Router /v1/teams [POST]
+// @Router /notify/teams [POST]
 // @Success 200
 func (p Universal) TeamsHandler(c *gin.Context) {
 	var jsonPublicTeams model.StUniversalProducerTeams
@@ -79,8 +79,7 @@ func (p Universal) TeamsHandler(c *gin.Context) {
 	}
 	util.StructPrintToJson(jsonTeams)
 
-	var sender *control.NotifySender
-	resp, errSended := sender.SendTeams(&jsonTeams)
+	resp, errSended := notifysender.SendTeams(&jsonTeams)
 	if errSended != nil {
 		log.Println(errSended)
 	}

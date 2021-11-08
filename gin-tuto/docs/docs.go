@@ -40,7 +40,7 @@ var doc = `{
                 }
             }
         },
-        "/v1/grafana/mail": {
+        "/notify/grafana/mail": {
             "post": {
                 "description": "자세한 설명은 이곳에 적습니다.",
                 "consumes": [
@@ -68,7 +68,7 @@ var doc = `{
                 }
             }
         },
-        "/v1/grafana/teams": {
+        "/notify/grafana/teams": {
             "post": {
                 "description": "자세한 설명은 이곳에 적습니다.",
                 "consumes": [
@@ -96,7 +96,7 @@ var doc = `{
                 }
             }
         },
-        "/v1/mail": {
+        "/notify/mail": {
             "post": {
                 "description": "universal notify api for mail",
                 "consumes": [
@@ -124,7 +124,7 @@ var doc = `{
                 }
             }
         },
-        "/v1/teams": {
+        "/notify/teams": {
             "post": {
                 "description": "universal notify api for teams",
                 "consumes": [
@@ -231,6 +231,7 @@ var doc = `{
                         "type": "string"
                     },
                     "example": {
+                        " region": "KR",
                         "game": "#MUA2"
                     }
                 },
@@ -269,6 +270,7 @@ var doc = `{
                         "type": "string"
                     },
                     "example": {
+                        " region": "KR",
                         "game": "#MUA2"
                     }
                 },

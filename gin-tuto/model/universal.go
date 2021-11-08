@@ -5,7 +5,7 @@ type stUniversalProducer struct {
 	From     string            `json:"from" binding:"required" example:""`
 	Title    string            `json:"title" binding:"required" example:""`
 	Content  string            `json:"content" binding:"required" example:""`
-	Tags     map[string]string `json:"tags" example:"game:#MUA2" region:KR`
+	Tags     map[string]string `json:"tags" example:"game:#MUA2, region:KR"`
 }
 
 type StUniversalProducerMail struct {
