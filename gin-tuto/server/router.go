@@ -11,6 +11,7 @@ import (
 	"github.com/spf13/viper"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"webzen.com/notifyhandler/control"
 	"webzen.com/notifyhandler/docs"
 	"webzen.com/notifyhandler/server/api"
 )
@@ -56,6 +57,7 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 	healthroot := new(api.HealthController)
 	router.GET("/health", healthroot.Status)
 	v1 := router.Group("/v1")
+	v1.Use(responser)
 	{
 		pub := new(api.Universal)
 		v1.POST("/mail", pub.MailHandler)
@@ -69,4 +71,16 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 		}
 	}
 	return router
+}
+
+func responser(ctx *gin.Context) {
+	// here you need to replace ctx.Writer by your wrapper
+
+	ctx.Next()
+
+	errResp := control.Responser.RaiseResponse(ctx)
+	if errResp != nil {
+		log.Println("raise error", errResp)
+	}
+	// here you can access the data, that your wrapper saved into a buffer
 }

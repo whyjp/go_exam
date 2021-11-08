@@ -3,13 +3,17 @@ package control
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/go-resty/resty/v2"
 	"webzen.com/notifyhandler/model"
 )
 
-type StNotifySender struct {
+const defaultBaseURL = "http://10.105.33.38"
+
+type NotifySender struct {
+	client *resty.Client
 }
 type AuthSuccess struct {
 }
@@ -21,20 +25,33 @@ type Error struct {
 	Message string `json:"error_message,omitempty"`
 }
 
+func NewStNotifySender() *NotifySender {
+	client := resty.New()
+	client.SetDebug(false)
+	client.SetTimeout(1 * time.Minute)
+	// Try getting Accounts API base URL from env var
+	apiURL := os.Getenv("API_ADDR")
+	if apiURL == "" {
+		apiURL = defaultBaseURL
+	}
+	client.SetHostURL(apiURL)
+	// Setting global error struct that maps to Form3's error response
+	client.SetError(&Error{})
+
+	return &NotifySender{client: client}
+}
+
 func getAPIError(resp *resty.Response) error {
 	apiError := resp.Error().(*Error)
 	return fmt.Errorf("request failed [%s]: %s", apiError.Code, apiError.Message)
 }
 
-func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
-	client := resty.New()
-	client.SetTimeout(1 * time.Minute)
-
-	resp, err := client.R().
+func (c *NotifySender) SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
+	resp, err := c.client.R().
 		SetBody(jsonTeams).
 		SetResult(AuthSuccess{}). // or SetResult(AuthSuccess{}).
 		SetError(&AuthError{}).   // or SetError(AuthError{}).
-		Post("http://10.105.33.38/alert/api/v2/teams")
+		Post("/alert/api/v2/teams")
 
 	if err != nil {
 		return nil, fmt.Errorf("send team to notify server failed: %s", err)
@@ -71,15 +88,12 @@ func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
 	return resp, nil
 }
 
-func SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
-	client := resty.New()
-	//client.SetTimeout(1 * time.Minute)
-
-	resp, err := client.R().
+func (c *NotifySender) SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
+	resp, err := c.client.R().
 		SetBody(jsonMail).
 		SetResult(AuthSuccess{}). // or SetResult(AuthSuccess{}).
 		SetError(&AuthError{}).   // or SetError(AuthError{}).
-		Post("http://10.105.33.38/alert/api/v2/email")
+		Post("/alert/api/v2/email")
 
 	if err != nil {
 		return nil, fmt.Errorf("send mail to notify server failed: %s", err)

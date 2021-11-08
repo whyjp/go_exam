@@ -34,17 +34,14 @@ func (p Grafana) MailHandler(c *gin.Context) {
 	var jsonMail model.StNotifyMail
 	util.StructPrintToJson(jsonMail)
 
-	resp, errSended := control.SendMail(&jsonMail)
+	sender := control.NewStNotifySender()
+	resp, errSended := sender.SendMail(&jsonMail)
 	if errSended != nil {
 		log.Println(errSended)
 	}
 	if resp != nil {
 		log.Println("resp", resp)
 		c.Set("responseCode", resp.StatusCode())
-		errResp := control.Responser.RaiseResponse(c)
-		if errResp != nil {
-			log.Println("raise error", errResp)
-		}
 	}
 }
 
@@ -67,18 +64,21 @@ func (p Grafana) TeamsHandler(c *gin.Context) {
 	util.StructPrintToJson(jsonGrafana)
 
 	var jsonTeams model.StNotifyTeams
-	util.StructPrintToJson(jsonTeams)
+	_, errMakeup := jsonTeams.SetFrom(jsonGrafana)
+	if errMakeup != nil {
+		log.Println("raise error", errMakeup)
+		c.Set("responseCode", http.StatusBadRequest)
+		c.Set("errorTitle", "grafana request struct error")
+		return
+	}
 
-	resp, errSended := control.SendTeams(&jsonTeams)
+	sender := control.NewStNotifySender()
+	resp, errSended := sender.SendTeams(&jsonTeams)
 	if errSended != nil {
 		log.Println(errSended)
 	}
 	if resp != nil {
 		log.Println("resp", resp)
 		c.Set("responseCode", resp.StatusCode())
-		errResp := control.Responser.RaiseResponse(c)
-		if errResp != nil {
-			log.Println("raise error", errResp)
-		}
 	}
 }

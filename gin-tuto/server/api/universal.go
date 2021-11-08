@@ -35,21 +35,19 @@ func (p Universal) MailHandler(c *gin.Context) {
 	_, errMakeup := jsonMail.SetFrom(jsonPublicMail)
 	if errMakeup != nil {
 		log.Println("raise error", errMakeup)
+		c.Set("responseCode", http.StatusBadRequest)
+		c.Set("errorTitle", "grafana request struct error")
 		return
 	}
 	util.StructPrintToJson(jsonMail)
-
-	resp, errSended := control.SendMail(&jsonMail)
+	sender := control.NewStNotifySender()
+	resp, errSended := sender.SendMail(&jsonMail)
 	if errSended != nil {
 		log.Println(errSended)
 	}
 	if resp != nil {
 		log.Println("resp", resp)
 		c.Set("responseCode", resp.StatusCode())
-		errResp := control.Responser.RaiseResponse(c)
-		if errResp != nil {
-			log.Println("raise error", errResp)
-		}
 	}
 }
 
@@ -72,18 +70,22 @@ func (p Universal) TeamsHandler(c *gin.Context) {
 	util.StructPrintToJson(jsonPublicTeams)
 
 	var jsonTeams model.StNotifyTeams
+	_, errMakeup := jsonTeams.SetFrom(jsonPublicTeams)
+	if errMakeup != nil {
+		log.Println("raise error", errMakeup)
+		c.Set("responseCode", http.StatusBadRequest)
+		c.Set("errorTitle", "grafana request struct error")
+		return
+	}
 	util.StructPrintToJson(jsonTeams)
 
-	resp, errSended := control.SendTeams(&jsonTeams)
+	var sender *control.NotifySender
+	resp, errSended := sender.SendTeams(&jsonTeams)
 	if errSended != nil {
 		log.Println(errSended)
 	}
 	if resp != nil {
 		log.Println("resp", resp)
 		c.Set("responseCode", resp.StatusCode())
-		errResp := control.Responser.RaiseResponse(c)
-		if errResp != nil {
-			log.Println("raise error", errResp)
-		}
 	}
 }

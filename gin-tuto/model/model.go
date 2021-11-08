@@ -61,3 +61,29 @@ func (s *StNotifyMail) SetFrom(from interface{}) (*StNotifyMail, error) {
 
 	return nil, errors.New(str)
 }
+
+func (s *StNotifyTeams) SetFrom(from interface{}) (*StNotifyTeams, error) {
+	if s != nil {
+		switch v := from.(type) {
+		case StGrafanaAlert:
+			s.Title = v.Title
+			s.Content.Text = v.Message
+			to, exist := v.Tags["Touri"]
+			if exist {
+				s.Touri = to
+			} else {
+				return nil, errors.New("to tag not found in grafana alert struct teams destination requeied to tag")
+			}
+			return s, nil
+		case StUniversalProducerTeams:
+			s.Title = v.Title
+			s.Content.Text = v.Content
+			s.From = v.From
+			s.Touri = v.Touri
+			return s, nil
+		}
+	}
+	str := "Can not convert NotifyTeams from " + reflect.TypeOf(from).String()
+
+	return nil, errors.New(str)
+}
