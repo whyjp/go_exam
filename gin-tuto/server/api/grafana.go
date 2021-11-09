@@ -32,11 +32,18 @@ func (p Grafana) MailHandler(c *gin.Context) {
 	util.StructPrintToJson(jsonGrafana)
 
 	var jsonMail model.StNotifyMail
+	_, err := jsonMail.SetFrom(jsonGrafana)
+	if err != nil {
+		log.Println("raise error", err)
+		c.Set("responseCode", http.StatusBadRequest)
+		c.Set("errorTitle", "grafana request struct error")
+		return
+	}
 	util.StructPrintToJson(jsonMail)
 
-	resp, errSended := notifysender.SendMail(&jsonMail)
-	if errSended != nil {
-		log.Println(errSended)
+	resp, err := notifysender.SendMail(&jsonMail)
+	if err != nil {
+		log.Println(err)
 	}
 	if resp != nil {
 		log.Println("resp", resp)
@@ -63,17 +70,17 @@ func (p Grafana) TeamsHandler(c *gin.Context) {
 	util.StructPrintToJson(jsonGrafana)
 
 	var jsonTeams model.StNotifyTeams
-	_, errMakeup := jsonTeams.SetFrom(jsonGrafana)
-	if errMakeup != nil {
-		log.Println("raise error", errMakeup)
+	_, err := jsonTeams.SetFrom(jsonGrafana)
+	if err != nil {
+		log.Println("raise error", err)
 		c.Set("responseCode", http.StatusBadRequest)
 		c.Set("errorTitle", "grafana request struct error")
 		return
 	}
 
-	resp, errSended := notifysender.SendTeams(&jsonTeams)
-	if errSended != nil {
-		log.Println(errSended)
+	resp, err := notifysender.SendTeams(&jsonTeams)
+	if err != nil {
+		log.Println(err)
 	}
 	if resp != nil {
 		log.Println("resp", resp)
