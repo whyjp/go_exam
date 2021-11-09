@@ -23,27 +23,27 @@ type Universal struct {
 // @Router /notify/mail [POST]
 // @Success 200
 func (p Universal) MailHandler(c *gin.Context) {
-	var jsonPublicMail model.StUniversalProducerMail
-	if err := c.BindJSON(&jsonPublicMail); err != nil {
+	var universalMail model.StUniversalProducerMail
+	if err := c.BindJSON(&universalMail); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
 	}
 
-	util.StructPrintToJson(jsonPublicMail)
+	util.StructPrintToJson(universalMail)
 
 	var jsonMail model.StNotifyMail
-	_, errMakeup := jsonMail.SetFrom(jsonPublicMail)
-	if errMakeup != nil {
-		log.Println("raise error", errMakeup)
+	_, err := jsonMail.SetFrom(universalMail)
+	if err != nil {
+		log.Println("raise error", err)
 		c.Set("responseCode", http.StatusBadRequest)
 		c.Set("errorTitle", "grafana request struct error")
 		return
 	}
 	util.StructPrintToJson(jsonMail)
 
-	resp, errSended := notifysender.SendMail(&jsonMail)
-	if errSended != nil {
-		log.Println(errSended)
+	resp, err := notifysender.SendMail(&jsonMail)
+	if err != nil {
+		log.Println(err)
 	}
 	if resp != nil {
 		log.Println("resp", resp)
@@ -61,27 +61,27 @@ func (p Universal) MailHandler(c *gin.Context) {
 // @Router /notify/teams [POST]
 // @Success 200
 func (p Universal) TeamsHandler(c *gin.Context) {
-	var jsonPublicTeams model.StUniversalProducerTeams
-	if err := c.BindJSON(&jsonPublicTeams); err != nil {
+	var universalTeams model.StUniversalProducerTeams
+	if err := c.BindJSON(&universalTeams); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
 	}
 
-	util.StructPrintToJson(jsonPublicTeams)
+	util.StructPrintToJson(universalTeams)
 
 	var jsonTeams model.StNotifyTeams
-	_, errMakeup := jsonTeams.SetFrom(jsonPublicTeams)
-	if errMakeup != nil {
-		log.Println("raise error", errMakeup)
+	_, err := jsonTeams.SetFrom(universalTeams)
+	if err != nil {
+		log.Println("raise error", err)
 		c.Set("responseCode", http.StatusBadRequest)
 		c.Set("errorTitle", "grafana request struct error")
 		return
 	}
 	util.StructPrintToJson(jsonTeams)
 
-	resp, errSended := notifysender.SendTeams(&jsonTeams)
-	if errSended != nil {
-		log.Println(errSended)
+	resp, err := notifysender.SendTeams(&jsonTeams)
+	if err != nil {
+		log.Println(err)
 	}
 	if resp != nil {
 		log.Println("resp", resp)
