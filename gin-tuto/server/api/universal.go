@@ -31,6 +31,7 @@ func (p Universal) MailHandler(c *gin.Context) {
 
 	util.StructPrintToJson(universalMail)
 	var resultSet = make(map[string]interface{})
+	defer util.ToContext(resultSet, c.Set)
 
 	var jsonMail model.StNotifyMail
 	_, err := jsonMail.SetFrom(universalMail)
@@ -38,7 +39,6 @@ func (p Universal) MailHandler(c *gin.Context) {
 		log.Println("raise error", err)
 		resultSet["responseCode"] = http.StatusBadRequest
 		resultSet["errorTitle"] = "universal request struct error"
-		util.ToContext(resultSet, c.Set)
 		return
 	}
 	util.StructPrintToJson(jsonMail)
@@ -50,7 +50,6 @@ func (p Universal) MailHandler(c *gin.Context) {
 	if resp != nil {
 		log.Println("resp", resp)
 		resultSet["responseCode"] = resp.StatusCode()
-		util.ToContext(resultSet, c.Set)
 	}
 }
 
@@ -73,6 +72,7 @@ func (p Universal) TeamsHandler(c *gin.Context) {
 	util.StructPrintToJson(universalTeams)
 
 	var resultSet = make(map[string]interface{})
+	defer util.ToContext(resultSet, c.Set)
 
 	var jsonTeams model.StNotifyTeams
 	_, err := jsonTeams.SetFrom(universalTeams)
@@ -80,8 +80,6 @@ func (p Universal) TeamsHandler(c *gin.Context) {
 		log.Println("raise error", err)
 		resultSet["responseCode"] = http.StatusBadRequest
 		resultSet["errorTitle"] = "grafana request struct error"
-
-		util.ToContext(resultSet, c.Set)
 		return
 	}
 	util.StructPrintToJson(jsonTeams)
@@ -94,8 +92,5 @@ func (p Universal) TeamsHandler(c *gin.Context) {
 		log.Println("resp", resp)
 
 		resultSet["responseCode"] = resp.StatusCode()
-
-		util.ToContext(resultSet, c.Set)
-		return
 	}
 }

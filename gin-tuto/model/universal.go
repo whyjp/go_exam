@@ -11,7 +11,7 @@ type stUniversalProducer struct {
 type StUniversalProducerMail struct {
 	stUniversalProducer
 	To string `json:"to" binding:"required" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
-	Cc string `json:"cc" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
+	Cc string `json:"cc,omitempty" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
 }
 type StUniversalProducerTeams struct {
 	stUniversalProducer
