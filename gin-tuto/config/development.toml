@@ -3,6 +3,6 @@ port = ":8080"
 log = "notifyhandler.log"
 
 [notifyserver]
-baseuri = "http://10.105.33.38"
+uri = "http://10.105.33.38"
 mail = "/alert/api/v2/mail"
 teams = "/alert/api/v2/teams"
