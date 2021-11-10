@@ -81,6 +81,5 @@ func responseMiddleware() gin.HandlerFunc {
 		if errResp != nil {
 			log.Println("raise error", errResp)
 		}
-		// here you can access the data, that your wrapper saved into a buffer
 	}
 }

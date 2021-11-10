@@ -1,5 +1,11 @@
 package model
 
+import (
+	"errors"
+
+	"webzen.com/notifyhandler/util"
+)
+
 type StGrafanaAlert struct {
 	DashboardID int64         `json:"dashboardId"`
 	EvalMatches []stEvalMatch `json:"evalMatches"`
@@ -26,4 +32,34 @@ type stEvalMatchTags struct {
 
 type stGrafanaAlertTags struct {
 	Tags map[string]string `json:"tags"`
+}
+
+func (v *StGrafanaAlert) ToMail() (*StNotifyMail, error) {
+	s := new(StNotifyMail)
+	s.Title = v.Title
+	s.Content.Text = v.Message
+	to, exist := v.Tags["To"]
+	if exist {
+		s.To = util.StringsToArray(to)
+	} else {
+		return nil, errors.New("to tag not found in grafana alert struct mail destination requeied to tag")
+	}
+	cc, exist := v.Tags["Cc"]
+	if exist {
+		s.Cc = util.StringsToArray(cc)
+	}
+	return s, nil
+}
+
+func (v *StGrafanaAlert) ToTeams() (*StNotifyTeams, error) {
+	s := new(StNotifyTeams)
+	s.Title = v.Title
+	s.Content.Text = v.Message
+	to, exist := v.Tags["Touri"]
+	if exist {
+		s.Touri = to
+	} else {
+		return nil, errors.New("to tag not found in grafana alert struct teams destination requeied to tag")
+	}
+	return s, nil
 }

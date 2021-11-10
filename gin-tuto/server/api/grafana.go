@@ -1,11 +1,10 @@
 package api
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"webzen.com/notifyhandler/control/notifysender"
+	"webzen.com/notifyhandler/control/center"
 	"webzen.com/notifyhandler/model"
 	"webzen.com/notifyhandler/util"
 )
@@ -30,27 +29,8 @@ func (p Grafana) MailHandler(c *gin.Context) {
 	}
 
 	util.StructPrintToJson(jsonGrafana)
-	var resultSet = make(map[string]interface{})
+	resultSet := center.ProcessMail(&jsonGrafana)
 	defer util.ToContext(resultSet, c.Set)
-
-	var jsonMail model.StNotifyMail
-	_, err := jsonMail.SetFrom(jsonGrafana)
-	if err != nil {
-		log.Println("raise error", err)
-		resultSet["responseCode"] = http.StatusBadRequest
-		resultSet["errorTitle"] = "grafana request struct error"
-		return
-	}
-	util.StructPrintToJson(jsonMail)
-
-	resp, err := notifysender.SendMail(&jsonMail)
-	if err != nil {
-		log.Println(err)
-	}
-	if resp != nil {
-		log.Println("resp", resp)
-		resultSet["responseCode"] = resp.StatusCode()
-	}
 }
 
 // Welcome godoc
@@ -70,24 +50,6 @@ func (p Grafana) TeamsHandler(c *gin.Context) {
 	}
 
 	util.StructPrintToJson(jsonGrafana)
-	var resultSet = make(map[string]interface{})
+	resultSet := center.ProcessTeams(&jsonGrafana)
 	defer util.ToContext(resultSet, c.Set)
-
-	var jsonTeams model.StNotifyTeams
-	_, err := jsonTeams.SetFrom(jsonGrafana)
-	if err != nil {
-		log.Println("raise error", err)
-		resultSet["responseCode"] = http.StatusBadRequest
-		resultSet["errorTitle"] = "grafana request struct error"
-		return
-	}
-
-	resp, err := notifysender.SendTeams(&jsonTeams)
-	if err != nil {
-		log.Println(err)
-	}
-	if resp != nil {
-		log.Println("resp", resp)
-		resultSet["responseCode"] = resp.StatusCode()
-	}
 }
