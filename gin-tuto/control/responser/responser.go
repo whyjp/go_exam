@@ -21,9 +21,14 @@ func RaiseResponse(c *gin.Context) error {
 	if exist {
 		log.Println("exist responseCode", statusCode.(int))
 		resp.Type = "OK"
-		resp.Status = int64(statusCode.(int))
+		resp.Status = statusCode.(int)
 		resp.Detail = "alert has sent by alert server"
-		resp.Title = "alert has sent"
+		errorTitle, exist := c.Get("errorTitle")
+		if exist {
+			resp.Title = errorTitle.(string)
+		} else {
+			resp.Title = "alert has sent"
+		}
 		resp.Instance = c.FullPath()
 
 		c.JSON(statusCode.(int), resp)

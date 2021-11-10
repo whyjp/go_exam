@@ -42,7 +42,7 @@ var doc = `{
         },
         "/notify/grafana/mail": {
             "post": {
-                "description": "자세한 설명은 이곳에 적습니다.",
+                "description": "그라파나로 부터 메일을 통해 메세지를 보내고자할 때 사용 합니다",
                 "consumes": [
                     "application/json"
                 ],
@@ -70,7 +70,7 @@ var doc = `{
         },
         "/notify/grafana/teams": {
             "post": {
-                "description": "자세한 설명은 이곳에 적습니다.",
+                "description": "그라파나로 부터 팀즈 를 향해 메세지를 보내고자 할 때 사용 합니다",
                 "consumes": [
                     "application/json"
                 ],

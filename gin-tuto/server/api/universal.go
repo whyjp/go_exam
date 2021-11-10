@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"webzen.com/notifyhandler/control/center"
+	"webzen.com/notifyhandler/control/processor"
 	"webzen.com/notifyhandler/model"
 	"webzen.com/notifyhandler/util"
 )
@@ -15,7 +15,7 @@ type Universal struct {
 // Welcome godoc
 // @Summary universal mail api  : have just post api
 // @Description universal notify api for mail
-// @name get-string-by-int
+// @name Universal.MailHandler
 // @Accept  json
 // @Produce  json
 // @Param  jsonbody body model.StUniversalProducerMail true "json struct for send mail"
@@ -29,14 +29,14 @@ func (p Universal) MailHandler(c *gin.Context) {
 	}
 
 	util.StructPrintToJson(universalMail)
-	var resultSet = center.ProcessMail(&universalMail)
+	var resultSet = processor.Mail(&universalMail)
 	defer util.ToContext(resultSet, c.Set)
 }
 
 // Welcome godoc
 // @Summary Grafana teams api  : have just post api
 // @Description universal notify api for teams
-// @name get-string-by-int
+// @name Universal.TeamsHandler
 // @Accept  json
 // @Produce  json
 // @Param  jsonbody body model.StUniversalProducerTeams true "json struct for send teams"
@@ -51,6 +51,6 @@ func (p Universal) TeamsHandler(c *gin.Context) {
 
 	util.StructPrintToJson(universalTeams)
 
-	var resultSet = center.ProcessTeams(&universalTeams)
+	var resultSet = processor.Teams(&universalTeams)
 	defer util.ToContext(resultSet, c.Set)
 }

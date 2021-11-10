@@ -6,10 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type apibase interface {
-	MailHandler(c *gin.Context)
-	TeamsHandler(c *gin.Context)
-}
 type HealthController struct{}
 
 // Welcome godoc

@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"webzen.com/notifyhandler/control/center"
+	"webzen.com/notifyhandler/control/processor"
 	"webzen.com/notifyhandler/model"
 	"webzen.com/notifyhandler/util"
 )
@@ -14,8 +14,8 @@ type Grafana struct {
 
 // Welcome godoc
 // @Summary Grafana mail api  : have just post api
-// @Description 자세한 설명은 이곳에 적습니다.
-// @name get-string-by-int
+// @Description 그라파나로 부터 메일을 통해 메세지를 보내고자할 때 사용 합니다
+// @name Grafana.MailHandler
 // @Accept  json
 // @Produce  json
 // @Param  jsonbody body model.StGrafanaAlert true "json struct for send mail"
@@ -29,14 +29,14 @@ func (p Grafana) MailHandler(c *gin.Context) {
 	}
 
 	util.StructPrintToJson(jsonGrafana)
-	resultSet := center.ProcessMail(&jsonGrafana)
+	resultSet := processor.Mail(&jsonGrafana)
 	defer util.ToContext(resultSet, c.Set)
 }
 
 // Welcome godoc
 // @Summary Grafana teams api  : have just post api
-// @Description 자세한 설명은 이곳에 적습니다.
-// @name get-string-by-int
+// @Description 그라파나로 부터 팀즈 를 향해 메세지를 보내고자 할 때 사용 합니다
+// @name Grafana.TeamsHandler
 // @Accept  json
 // @Produce  json
 // @Param  jsonbody body model.StGrafanaAlert true "json struct for send teams"
@@ -50,6 +50,6 @@ func (p Grafana) TeamsHandler(c *gin.Context) {
 	}
 
 	util.StructPrintToJson(jsonGrafana)
-	resultSet := center.ProcessTeams(&jsonGrafana)
+	resultSet := processor.Teams(&jsonGrafana)
 	defer util.ToContext(resultSet, c.Set)
 }

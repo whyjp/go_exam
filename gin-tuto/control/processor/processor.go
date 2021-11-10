@@ -1,4 +1,4 @@
-package center
+package processor
 
 import (
 	"log"
@@ -15,14 +15,14 @@ type TeamsCenter interface {
 	ToTeams() (*model.StNotifyTeams, error)
 }
 
-func ProcessMail(s MaillCenter) map[string]interface{} {
+func Mail(s MaillCenter) map[string]interface{} {
 	var resultSet = make(map[string]interface{})
 
 	jsonMail, err := s.ToMail()
 	if err != nil {
 		log.Println("raise error", err)
 		resultSet["responseCode"] = http.StatusBadRequest
-		resultSet["errorTitle"] = "grafana request struct error"
+		resultSet["errorTitle"] = "request struct error"
 		return resultSet
 	}
 
@@ -36,14 +36,14 @@ func ProcessMail(s MaillCenter) map[string]interface{} {
 	}
 	return resultSet
 }
-func ProcessTeams(s TeamsCenter) map[string]interface{} {
+func Teams(s TeamsCenter) map[string]interface{} {
 	var resultSet = make(map[string]interface{})
 
 	jsonTeams, err := s.ToTeams()
 	if err != nil {
 		log.Println("raise error", err)
 		resultSet["responseCode"] = http.StatusBadRequest
-		resultSet["errorTitle"] = "grafana request struct error"
+		resultSet["errorTitle"] = "request struct error"
 		return resultSet
 	}
 
