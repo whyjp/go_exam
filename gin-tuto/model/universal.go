@@ -10,7 +10,7 @@ type stUniversalProducer struct {
 	Tags     map[string]string `json:"tags" example:"game:#MUA2, region:KR"`
 }
 
-type StUniversalProducerMail struct {
+type StUniversalProducerEMail struct {
 	stUniversalProducer
 	To string `json:"to" binding:"required" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
 	Cc string `json:"cc,omitempty" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
@@ -20,8 +20,8 @@ type StUniversalProducerTeams struct {
 	Touri string `json:"touri" binding:"required" example:"http://xxx.x.xx.xxx.x."`
 }
 
-func (v *StUniversalProducerMail) ToMail() (*StNotifyMail, error) {
-	s := new(StNotifyMail)
+func (v *StUniversalProducerEMail) ToEMail() (*StNotifyEMail, error) {
+	s := new(StNotifyEMail)
 	s.Title = v.Title
 	s.Content.Text = v.Content
 	s.From = v.From

@@ -13,23 +13,23 @@ type Universal struct {
 }
 
 // Welcome godoc
-// @Summary universal mail api  : have just post api
-// @Description universal notify api for mail
-// @name Universal.MailHandler
+// @Summary universal Email api  : have just post api
+// @Description universal notify api for email
+// @name Universal.EMailHandler
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.StUniversalProducerMail true "json struct for send mail"
-// @Router /notify/mail [POST]
+// @Param  jsonbody body model.StUniversalProducerEMail true "json struct for send email"
+// @Router /notify/email [POST]
 // @Success 200
-func (p Universal) MailHandler(c *gin.Context) {
-	var universalMail model.StUniversalProducerMail
-	if err := c.BindJSON(&universalMail); err != nil {
+func (p Universal) EMailHandler(c *gin.Context) {
+	var universalEMail model.StUniversalProducerEMail
+	if err := c.BindJSON(&universalEMail); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
 	}
 
-	util.StructPrintToJson(universalMail)
-	var resultSet = processor.Mail(&universalMail)
+	util.StructPrintToJson(universalEMail)
+	var resultSet = processor.EMail(&universalEMail)
 	defer util.ToContext(resultSet, c.Set)
 }
 

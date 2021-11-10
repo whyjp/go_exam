@@ -34,8 +34,8 @@ type stGrafanaAlertTags struct {
 	Tags map[string]string `json:"tags"`
 }
 
-func (v *StGrafanaAlert) ToMail() (*StNotifyMail, error) {
-	s := new(StNotifyMail)
+func (v *StGrafanaAlert) ToEMail() (*StNotifyEMail, error) {
+	s := new(StNotifyEMail)
 	s.Title = v.Title
 	s.Content.Text = v.Message
 	to, exist := v.Tags["To"]

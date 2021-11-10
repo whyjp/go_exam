@@ -5,7 +5,7 @@ type stNotifyCommon struct {
 	Title string `json:"title" binding:"required" example:"title"`
 }
 
-type StNotifyMail struct {
+type StNotifyEMail struct {
 	stNotifyCommon
 	To      []string      `json:"to" binding:"required" example:"{yyy@xxxx.co.kr, xxx@fasdf.com}"`
 	Cc      []string      `json:"cc,omitempty" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`

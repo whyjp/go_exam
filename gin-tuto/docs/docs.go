@@ -40,7 +40,35 @@ var doc = `{
                 }
             }
         },
-        "/notify/grafana/mail": {
+        "/notify/email": {
+            "post": {
+                "description": "universal notify api for email",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "universal Email api  : have just post api",
+                "parameters": [
+                    {
+                        "description": "json struct for send email",
+                        "name": "jsonbody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.StUniversalProducerEMail"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/notify/grafana/email": {
             "post": {
                 "description": "그라파나로 부터 메일을 통해 메세지를 보내고자할 때 사용 합니다",
                 "consumes": [
@@ -52,7 +80,7 @@ var doc = `{
                 "summary": "Grafana mail api  : have just post api",
                 "parameters": [
                     {
-                        "description": "json struct for send mail",
+                        "description": "json struct for send email",
                         "name": "jsonbody",
                         "in": "body",
                         "required": true,
@@ -86,34 +114,6 @@ var doc = `{
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/model.StGrafanaAlert"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/notify/mail": {
-            "post": {
-                "description": "universal notify api for mail",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "universal mail api  : have just post api",
-                "parameters": [
-                    {
-                        "description": "json struct for send mail",
-                        "name": "jsonbody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/model.StUniversalProducerMail"
                         }
                     }
                 ],
@@ -201,7 +201,7 @@ var doc = `{
                 }
             }
         },
-        "model.StUniversalProducerMail": {
+        "model.StUniversalProducerEMail": {
             "type": "object",
             "required": [
                 "content",

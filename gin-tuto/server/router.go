@@ -60,13 +60,13 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 	notify.Use(responseMiddleware())
 	{
 		pub := new(api.Universal)
-		notify.POST("/mail", pub.MailHandler)
+		notify.POST("/email", pub.EMailHandler)
 		notify.POST("/teams", pub.TeamsHandler)
 
 		grafanaRouter := notify.Group("grafana")
 		{
 			grafana := new(api.Grafana)
-			grafanaRouter.POST("/mail", grafana.MailHandler)
+			grafanaRouter.POST("/email", grafana.EMailHandler)
 			grafanaRouter.POST("/teams", grafana.TeamsHandler)
 		}
 	}

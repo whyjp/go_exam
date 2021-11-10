@@ -8,17 +8,17 @@ import (
 	"webzen.com/notifyhandler/model"
 )
 
-type MaillCenter interface {
-	ToMail() (*model.StNotifyMail, error)
+type EMaillCenter interface {
+	ToEMail() (*model.StNotifyEMail, error)
 }
 type TeamsCenter interface {
 	ToTeams() (*model.StNotifyTeams, error)
 }
 
-func Mail(s MaillCenter) map[string]interface{} {
+func EMail(s EMaillCenter) map[string]interface{} {
 	var resultSet = make(map[string]interface{})
 
-	jsonMail, err := s.ToMail()
+	jsonEMail, err := s.ToEMail()
 	if err != nil {
 		log.Println("raise error", err)
 		resultSet["responseCode"] = http.StatusBadRequest
@@ -26,7 +26,7 @@ func Mail(s MaillCenter) map[string]interface{} {
 		return resultSet
 	}
 
-	resp, err := notifysender.SendMail(jsonMail)
+	resp, err := notifysender.SendEMail(jsonEMail)
 	if err != nil {
 		log.Println(err)
 	}

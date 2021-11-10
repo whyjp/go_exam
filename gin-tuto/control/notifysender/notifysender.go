@@ -68,9 +68,9 @@ func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
 	return resp, nil
 }
 
-func SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
+func SendEMail(jsonEMail *model.StNotifyEMail) (*resty.Response, error) {
 	resp, err := client.R().
-		SetBody(jsonMail).
+		SetBody(jsonEMail).
 		SetResult(authSuccess{}). // or SetResult(AuthSuccess{}).
 		SetError(&authError{}).   // or SetError(AuthError{}).
 		Post(emailPath)

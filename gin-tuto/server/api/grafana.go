@@ -15,13 +15,13 @@ type Grafana struct {
 // Welcome godoc
 // @Summary Grafana mail api  : have just post api
 // @Description 그라파나로 부터 메일을 통해 메세지를 보내고자할 때 사용 합니다
-// @name Grafana.MailHandler
+// @name Grafana.EMailHandler
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.StGrafanaAlert true "json struct for send mail"
-// @Router /notify/grafana/mail [POST]
+// @Param  jsonbody body model.StGrafanaAlert true "json struct for send email"
+// @Router /notify/grafana/email [POST]
 // @Success 200
-func (p Grafana) MailHandler(c *gin.Context) {
+func (p Grafana) EMailHandler(c *gin.Context) {
 	var jsonGrafana model.StGrafanaAlert
 	if err := c.BindJSON(&jsonGrafana); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
@@ -29,7 +29,7 @@ func (p Grafana) MailHandler(c *gin.Context) {
 	}
 
 	util.StructPrintToJson(jsonGrafana)
-	resultSet := processor.Mail(&jsonGrafana)
+	resultSet := processor.EMail(&jsonGrafana)
 	defer util.ToContext(resultSet, c.Set)
 }
 

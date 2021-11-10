@@ -30,7 +30,7 @@ definitions:
       title:
         type: string
     type: object
-  model.StUniversalProducerMail:
+  model.StUniversalProducerEMail:
     properties:
       cc:
         example: xxx@yyyy.com;yyy@xxxx.co.kr
@@ -114,13 +114,31 @@ paths:
         "200":
           description: ""
       summary: site health check is running will return "working!"
-  /notify/grafana/mail:
+  /notify/email:
+    post:
+      consumes:
+      - application/json
+      description: universal notify api for email
+      parameters:
+      - description: json struct for send email
+        in: body
+        name: jsonbody
+        required: true
+        schema:
+          $ref: '#/definitions/model.StUniversalProducerEMail'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 'universal Email api  : have just post api'
+  /notify/grafana/email:
     post:
       consumes:
       - application/json
       description: 그라파나로 부터 메일을 통해 메세지를 보내고자할 때 사용 합니다
       parameters:
-      - description: json struct for send mail
+      - description: json struct for send email
         in: body
         name: jsonbody
         required: true
@@ -150,24 +168,6 @@ paths:
         "200":
           description: ""
       summary: 'Grafana teams api  : have just post api'
-  /notify/mail:
-    post:
-      consumes:
-      - application/json
-      description: universal notify api for mail
-      parameters:
-      - description: json struct for send mail
-        in: body
-        name: jsonbody
-        required: true
-        schema:
-          $ref: '#/definitions/model.StUniversalProducerMail'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: ""
-      summary: 'universal mail api  : have just post api'
   /notify/teams:
     post:
       consumes:
