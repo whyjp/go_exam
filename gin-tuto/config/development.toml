@@ -4,5 +4,5 @@ log = "notifyhandler.log"
 
 [notifyserver]
 uri = "http://10.105.33.38"
-mail = "/alert/api/v2/mail"
+email = "/alert/api/v2/email"
 teams = "/alert/api/v2/teams"

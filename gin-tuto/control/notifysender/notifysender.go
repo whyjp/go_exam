@@ -7,10 +7,13 @@ import (
 	"time"
 
 	"github.com/go-resty/resty/v2"
+	"github.com/spf13/viper"
 	"webzen.com/notifyhandler/model"
 )
 
-const defaultBaseURL = "http://10.105.33.38"
+var defaultBaseURL = "http://10.105.33.38"
+var emailPath = "/alert/api/v2/email"
+var teamsPath = "/alert/api/v2/teams"
 
 var client *resty.Client
 
@@ -42,13 +45,17 @@ func getAPIError(resp *resty.Response) error {
 	apiError := resp.Error().(*Error)
 	return fmt.Errorf("request failed [%s]: %s", apiError.Code, apiError.Message)
 }
-
+func SetConfig(config *viper.Viper) {
+	defaultBaseURL = config.GetString("notifyserver.baseuri")
+	emailPath = config.GetString("notifyserver.email")
+	teamsPath = config.GetString("notifyserver.teams")
+}
 func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
 	resp, err := client.R().
 		SetBody(jsonTeams).
 		SetResult(authSuccess{}). // or SetResult(AuthSuccess{}).
 		SetError(&authError{}).   // or SetError(AuthError{}).
-		Post("/alert/api/v2/teams")
+		Post(teamsPath)
 
 	if err != nil {
 		return nil, fmt.Errorf("send team to notify server failed: %s", err)
@@ -66,7 +73,7 @@ func SendMail(jsonMail *model.StNotifyMail) (*resty.Response, error) {
 		SetBody(jsonMail).
 		SetResult(authSuccess{}). // or SetResult(AuthSuccess{}).
 		SetError(&authError{}).   // or SetError(AuthError{}).
-		Post("/alert/api/v2/email")
+		Post(emailPath)
 
 	if err != nil {
 		return nil, fmt.Errorf("send mail to notify server failed: %s", err)
