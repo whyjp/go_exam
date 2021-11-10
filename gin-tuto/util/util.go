@@ -7,7 +7,7 @@ import (
 )
 
 func StructPrintToJson(from interface{}) {
-	data, _ := json.Marshal(from)
+	data, _ := json.MarshalIndent(from, "", " ")
 
 	fmt.Printf("%s \n", data)
 }
