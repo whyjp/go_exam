@@ -57,7 +57,7 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 	healthroot := new(api.HealthController)
 	router.GET("/health", healthroot.Status)
 	notify := router.Group("/notify")
-	notify.Use(responseMiddleware)
+	notify.Use(responseMiddleware())
 	{
 		pub := new(api.Universal)
 		notify.POST("/mail", pub.MailHandler)
@@ -73,14 +73,14 @@ func NewRouter(config *viper.Viper) *gin.Engine {
 	return router
 }
 
-func responseMiddleware(ctx *gin.Context) {
-	// here you need to replace ctx.Writer by your wrapper
+func responseMiddleware() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		ctx.Next()
 
-	ctx.Next()
-
-	errResp := responser.RaiseResponse(ctx)
-	if errResp != nil {
-		log.Println("raise error", errResp)
+		errResp := responser.RaiseResponse(ctx)
+		if errResp != nil {
+			log.Println("raise error", errResp)
+		}
+		// here you can access the data, that your wrapper saved into a buffer
 	}
-	// here you can access the data, that your wrapper saved into a buffer
 }
