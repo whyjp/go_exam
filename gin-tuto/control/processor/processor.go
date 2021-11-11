@@ -9,10 +9,10 @@ import (
 )
 
 type EMaillCenter interface {
-	ToEMail() (*model.StNotifyEMail, error)
+	ToEMail() (*model.NotifyEMail, error)
 }
 type TeamsCenter interface {
-	ToTeams() (*model.StNotifyTeams, error)
+	ToTeams() (*model.NotifyTeams, error)
 }
 
 func EMail(s EMaillCenter) map[string]interface{} {

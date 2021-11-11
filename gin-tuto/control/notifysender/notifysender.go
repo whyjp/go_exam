@@ -3,7 +3,6 @@ package notifysender
 import (
 	"fmt"
 	"log"
-	"os"
 	"time"
 
 	"github.com/go-resty/resty/v2"
@@ -32,10 +31,7 @@ func init() {
 	client.SetDebug(false)
 	client.SetTimeout(1 * time.Minute)
 	// Try getting Accounts API base URL from env var
-	apiURL := os.Getenv("API_ADDR")
-	if apiURL == "" {
-		apiURL = defaultBaseURL
-	}
+	apiURL := defaultBaseURL
 	client.SetHostURL(apiURL)
 	// Setting global error struct that maps to Form3's error response
 	client.SetError(&Error{})
@@ -50,7 +46,7 @@ func SetConfig(config *viper.Viper) {
 	emailPath = config.GetString("notifyserver.email")
 	teamsPath = config.GetString("notifyserver.teams")
 }
-func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
+func SendTeams(jsonTeams *model.NotifyTeams) (*resty.Response, error) {
 	resp, err := client.R().
 		SetBody(jsonTeams).
 		SetResult(authSuccess{}). // or SetResult(AuthSuccess{}).
@@ -68,7 +64,7 @@ func SendTeams(jsonTeams *model.StNotifyTeams) (*resty.Response, error) {
 	return resp, nil
 }
 
-func SendEMail(jsonEMail *model.StNotifyEMail) (*resty.Response, error) {
+func SendEMail(jsonEMail *model.NotifyEMail) (*resty.Response, error) {
 	resp, err := client.R().
 		SetBody(jsonEMail).
 		SetResult(authSuccess{}). // or SetResult(AuthSuccess{}).

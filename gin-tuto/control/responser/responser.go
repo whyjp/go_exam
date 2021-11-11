@@ -8,13 +8,8 @@ import (
 	"webzen.com/notifyhandler/model"
 )
 
-type StResponser struct {
-}
-
-var Responser StResponser
-
 func RaiseResponse(c *gin.Context) error {
-	var resp model.StResponse
+	var resp model.ResponseSet
 
 	log.Println("in raise response")
 	statusCode, exist := c.Get("responseCode")

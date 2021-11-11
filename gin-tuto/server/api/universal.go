@@ -18,11 +18,11 @@ type Universal struct {
 // @name Universal.EMailHandler
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.StUniversalProducerEMail true "json struct for send email"
+// @Param  jsonbody body model.UniversalProducerEMail true "json struct for send email"
 // @Router /notify/email [POST]
 // @Success 200
 func (p Universal) EMailHandler(c *gin.Context) {
-	var universalEMail model.StUniversalProducerEMail
+	var universalEMail model.UniversalProducerEMail
 	if err := c.BindJSON(&universalEMail); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
@@ -39,11 +39,11 @@ func (p Universal) EMailHandler(c *gin.Context) {
 // @name Universal.TeamsHandler
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.StUniversalProducerTeams true "json struct for send teams"
+// @Param  jsonbody body model.UniversalProducerTeams true "json struct for send teams"
 // @Router /notify/teams [POST]
 // @Success 200
 func (p Universal) TeamsHandler(c *gin.Context) {
-	var universalTeams model.StUniversalProducerTeams
+	var universalTeams model.UniversalProducerTeams
 	if err := c.BindJSON(&universalTeams); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return

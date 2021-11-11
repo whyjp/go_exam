@@ -1,11 +1,11 @@
 definitions:
-  model.StGrafanaAlert:
+  model.GrafanaAlert:
     properties:
       dashboardId:
         type: integer
       evalMatches:
         items:
-          $ref: '#/definitions/model.stEvalMatch'
+          $ref: '#/definitions/model.evalMatch'
         type: array
       imageUrl:
         type: string
@@ -30,26 +30,40 @@ definitions:
       title:
         type: string
     type: object
-  model.StUniversalProducerEMail:
+  model.UniversalProducerEMail:
     properties:
+      bcc:
+        example: xxx@yyyy.com;yyy@xxxx.co.kr
+        type: string
       cc:
         example: xxx@yyyy.com;yyy@xxxx.co.kr
         type: string
       content:
+        example: |-
+          swagger webapp test send notify
+          hi
+          hello
+          goodbye
+          im swagger notify handler
         type: string
       from:
+        example: swagger webapp
+        type: string
+      image_url:
+        example: http://internal.image.url/imgname.jpg
         type: string
       producer:
-        example: wiss or wingo or kiss or more
+        example: swagger
         type: string
       tags:
         additionalProperties:
           type: string
         example:
           ' region': KR
-          game: '#MUA2'
+          game: MUA2
         type: object
       title:
+        example: swagger webapp test send notify
         type: string
       to:
         example: xxx@yyyy.com;yyy@xxxx.co.kr
@@ -61,26 +75,37 @@ definitions:
     - title
     - to
     type: object
-  model.StUniversalProducerTeams:
+  model.UniversalProducerTeams:
     properties:
       content:
+        example: |-
+          swagger webapp test send notify
+          hi
+          hello
+          goodbye
+          im swagger notify handler
         type: string
       from:
+        example: swagger webapp
+        type: string
+      image_url:
+        example: http://internal.image.url/imgname.jpg
         type: string
       producer:
-        example: wiss or wingo or kiss or more
+        example: swagger
         type: string
       tags:
         additionalProperties:
           type: string
         example:
           ' region': KR
-          game: '#MUA2'
+          game: MUA2
         type: object
       title:
+        example: swagger webapp test send notify
         type: string
       touri:
-        example: http://xxx.x.xx.xxx.x.
+        example: http://xxx.x.xx.xxx.x;http://xxx.x.xx.xxx.x
         type: string
     required:
     - content
@@ -89,16 +114,16 @@ definitions:
     - title
     - touri
     type: object
-  model.stEvalMatch:
+  model.evalMatch:
     properties:
       metric:
         type: string
       tags:
-        $ref: '#/definitions/model.stEvalMatchTags'
+        $ref: '#/definitions/model.evalMatchTags'
       value:
         type: integer
     type: object
-  model.stEvalMatchTags:
+  model.evalMatchTags:
     type: object
 info:
   contact: {}
@@ -125,7 +150,7 @@ paths:
         name: jsonbody
         required: true
         schema:
-          $ref: '#/definitions/model.StUniversalProducerEMail'
+          $ref: '#/definitions/model.UniversalProducerEMail'
       produces:
       - application/json
       responses:
@@ -143,7 +168,7 @@ paths:
         name: jsonbody
         required: true
         schema:
-          $ref: '#/definitions/model.StGrafanaAlert'
+          $ref: '#/definitions/model.GrafanaAlert'
       produces:
       - application/json
       responses:
@@ -161,7 +186,7 @@ paths:
         name: jsonbody
         required: true
         schema:
-          $ref: '#/definitions/model.StGrafanaAlert'
+          $ref: '#/definitions/model.GrafanaAlert'
       produces:
       - application/json
       responses:
@@ -179,11 +204,29 @@ paths:
         name: jsonbody
         required: true
         schema:
-          $ref: '#/definitions/model.StUniversalProducerTeams'
+          $ref: '#/definitions/model.UniversalProducerTeams'
       produces:
       - application/json
       responses:
         "200":
           description: ""
       summary: 'Grafana teams api  : have just post api'
+  /rule/silent:
+    post:
+      consumes:
+      - application/json
+      description: rule notify api for email
+      parameters:
+      - description: json struct for send email
+        in: body
+        name: jsonbody
+        required: true
+        schema:
+          $ref: '#/definitions/model.UniversalProducerEMail'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 'rule Email api  : have just post api'
 swagger: "2.0"

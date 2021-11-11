@@ -18,11 +18,11 @@ type Grafana struct {
 // @name Grafana.EMailHandler
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.StGrafanaAlert true "json struct for send email"
+// @Param  jsonbody body model.GrafanaAlert true "json struct for send email"
 // @Router /notify/grafana/email [POST]
 // @Success 200
 func (p Grafana) EMailHandler(c *gin.Context) {
-	var jsonGrafana model.StGrafanaAlert
+	var jsonGrafana model.GrafanaAlert
 	if err := c.BindJSON(&jsonGrafana); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return
@@ -39,11 +39,11 @@ func (p Grafana) EMailHandler(c *gin.Context) {
 // @name Grafana.TeamsHandler
 // @Accept  json
 // @Produce  json
-// @Param  jsonbody body model.StGrafanaAlert true "json struct for send teams"
+// @Param  jsonbody body model.GrafanaAlert true "json struct for send teams"
 // @Router /notify/grafana/teams [POST]
 // @Success 200
 func (p Grafana) TeamsHandler(c *gin.Context) {
-	var jsonGrafana model.StGrafanaAlert
+	var jsonGrafana model.GrafanaAlert
 	if err := c.BindJSON(&jsonGrafana); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"Json body binding error": err.Error()})
 		return

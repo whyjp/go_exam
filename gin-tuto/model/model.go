@@ -1,23 +1,24 @@
 package model
 
-type stNotifyCommon struct {
-	From  string `json:"from" binding:"required" example:"from-id"`
-	Title string `json:"title" binding:"required" example:"title"`
+type notifyCommon struct {
+	From     string   `json:"from" binding:"required" example:"from-id"`
+	To       []string `json:"to" binding:"required" example:"{yyy@xxxx.co.kr, xxx@fasdf.com}"`
+	Title    string   `json:"title" binding:"required" example:"title"`
+	ImageURL string   `json:"image_url,omitempty" example:"internal image url"`
 }
 
-type StNotifyEMail struct {
-	stNotifyCommon
-	To      []string      `json:"to" binding:"required" example:"{yyy@xxxx.co.kr, xxx@fasdf.com}"`
-	Cc      []string      `json:"cc,omitempty" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
-	Content stmailContent `json:"content"`
+type NotifyEMail struct {
+	notifyCommon
+	Cc      []string       `json:"cc,omitempty" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
+	Bcc     []string       `json:"bcc,omitempty" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
+	Content stEmailContent `json:"content"`
 }
-type stmailContent struct {
-	Text string `json:"text" example:"content text in notify mail"`
+type stEmailContent struct {
+	Text string `json:"text" example:"content text in notify Email"`
 }
 
-type StNotifyTeams struct {
-	stNotifyCommon
-	Touri   string         `json:"touri" binding:"required" example:"http://xxx.x.xx.xxx.x."`
+type NotifyTeams struct {
+	notifyCommon
 	Content stteamsContent `json:"content"`
 }
 type stteamsContent struct {

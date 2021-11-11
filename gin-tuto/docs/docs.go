@@ -57,7 +57,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.StUniversalProducerEMail"
+                            "$ref": "#/definitions/model.UniversalProducerEMail"
                         }
                     }
                 ],
@@ -85,7 +85,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.StGrafanaAlert"
+                            "$ref": "#/definitions/model.GrafanaAlert"
                         }
                     }
                 ],
@@ -113,7 +113,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.StGrafanaAlert"
+                            "$ref": "#/definitions/model.GrafanaAlert"
                         }
                     }
                 ],
@@ -141,7 +141,35 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.StUniversalProducerTeams"
+                            "$ref": "#/definitions/model.UniversalProducerTeams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/rule/silent": {
+            "post": {
+                "description": "rule notify api for email",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "rule Email api  : have just post api",
+                "parameters": [
+                    {
+                        "description": "json struct for send email",
+                        "name": "jsonbody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.UniversalProducerEMail"
                         }
                     }
                 ],
@@ -154,7 +182,7 @@ var doc = `{
         }
     },
     "definitions": {
-        "model.StGrafanaAlert": {
+        "model.GrafanaAlert": {
             "type": "object",
             "properties": {
                 "dashboardId": {
@@ -163,7 +191,7 @@ var doc = `{
                 "evalMatches": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/model.stEvalMatch"
+                        "$ref": "#/definitions/model.evalMatch"
                     }
                 },
                 "imageUrl": {
@@ -201,7 +229,7 @@ var doc = `{
                 }
             }
         },
-        "model.StUniversalProducerEMail": {
+        "model.UniversalProducerEMail": {
             "type": "object",
             "required": [
                 "content",
@@ -211,19 +239,29 @@ var doc = `{
                 "to"
             ],
             "properties": {
+                "bcc": {
+                    "type": "string",
+                    "example": "xxx@yyyy.com;yyy@xxxx.co.kr"
+                },
                 "cc": {
                     "type": "string",
                     "example": "xxx@yyyy.com;yyy@xxxx.co.kr"
                 },
                 "content": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "swagger webapp test send notify\nhi\nhello\ngoodbye\nim swagger notify handler"
                 },
                 "from": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "swagger webapp"
+                },
+                "image_url": {
+                    "type": "string",
+                    "example": "http://internal.image.url/imgname.jpg"
                 },
                 "producer": {
                     "type": "string",
-                    "example": "wiss or wingo or kiss or more"
+                    "example": "swagger"
                 },
                 "tags": {
                     "type": "object",
@@ -232,11 +270,12 @@ var doc = `{
                     },
                     "example": {
                         " region": "KR",
-                        "game": "#MUA2"
+                        "game": "MUA2"
                     }
                 },
                 "title": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "swagger webapp test send notify"
                 },
                 "to": {
                     "type": "string",
@@ -244,7 +283,7 @@ var doc = `{
                 }
             }
         },
-        "model.StUniversalProducerTeams": {
+        "model.UniversalProducerTeams": {
             "type": "object",
             "required": [
                 "content",
@@ -255,14 +294,20 @@ var doc = `{
             ],
             "properties": {
                 "content": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "swagger webapp test send notify\nhi\nhello\ngoodbye\nim swagger notify handler"
                 },
                 "from": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "swagger webapp"
+                },
+                "image_url": {
+                    "type": "string",
+                    "example": "http://internal.image.url/imgname.jpg"
                 },
                 "producer": {
                     "type": "string",
-                    "example": "wiss or wingo or kiss or more"
+                    "example": "swagger"
                 },
                 "tags": {
                     "type": "object",
@@ -271,33 +316,34 @@ var doc = `{
                     },
                     "example": {
                         " region": "KR",
-                        "game": "#MUA2"
+                        "game": "MUA2"
                     }
                 },
                 "title": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "swagger webapp test send notify"
                 },
                 "touri": {
                     "type": "string",
-                    "example": "http://xxx.x.xx.xxx.x."
+                    "example": "http://xxx.x.xx.xxx.x;http://xxx.x.xx.xxx.x"
                 }
             }
         },
-        "model.stEvalMatch": {
+        "model.evalMatch": {
             "type": "object",
             "properties": {
                 "metric": {
                     "type": "string"
                 },
                 "tags": {
-                    "$ref": "#/definitions/model.stEvalMatchTags"
+                    "$ref": "#/definitions/model.evalMatchTags"
                 },
                 "value": {
                     "type": "integer"
                 }
             }
         },
-        "model.stEvalMatchTags": {
+        "model.evalMatchTags": {
             "type": "object"
         }
     }

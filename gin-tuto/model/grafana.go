@@ -6,58 +6,58 @@ import (
 	"webzen.com/notifyhandler/util"
 )
 
-type StGrafanaAlert struct {
-	DashboardID int64         `json:"dashboardId"`
-	EvalMatches []stEvalMatch `json:"evalMatches"`
-	ImageURL    string        `json:"imageUrl"`
-	Message     string        `json:"message"`
-	OrgID       int64         `json:"orgId"`
-	PanelID     int64         `json:"panelId"`
-	RuleID      int64         `json:"ruleId"`
-	RuleName    string        `json:"ruleName"`
-	RuleURL     string        `json:"ruleUrl"`
-	State       string        `json:"state"`
-	stGrafanaAlertTags
+type GrafanaAlert struct {
+	DashboardID int64       `json:"dashboardId"`
+	EvalMatches []evalMatch `json:"evalMatches"`
+	ImageURL    string      `json:"imageUrl"`
+	Message     string      `json:"message"`
+	OrgID       int64       `json:"orgId"`
+	PanelID     int64       `json:"panelId"`
+	RuleID      int64       `json:"ruleId"`
+	RuleName    string      `json:"ruleName"`
+	RuleURL     string      `json:"ruleUrl"`
+	State       string      `json:"state"`
+	GrafanaAlertTags
 	Title string `json:"title"`
 }
 
-type stEvalMatch struct {
-	Value  int64           `json:"value"`
-	Metric string          `json:"metric"`
-	Tags   stEvalMatchTags `json:"tags"`
+type evalMatch struct {
+	Value  int64         `json:"value"`
+	Metric string        `json:"metric"`
+	Tags   evalMatchTags `json:"tags"`
 }
 
-type stEvalMatchTags struct {
+type evalMatchTags struct {
 }
 
-type stGrafanaAlertTags struct {
+type GrafanaAlertTags struct {
 	Tags map[string]string `json:"tags"`
 }
 
-func (v *StGrafanaAlert) ToEMail() (*StNotifyEMail, error) {
-	s := new(StNotifyEMail)
+func (v *GrafanaAlert) ToEMail() (*NotifyEMail, error) {
+	s := new(NotifyEMail)
 	s.Title = v.Title
 	s.Content.Text = v.Message
-	to, exist := v.Tags["To"]
+	to, exist := v.Tags["to"]
 	if exist {
 		s.To = util.StringsToArray(to)
 	} else {
 		return nil, errors.New("to tag not found in grafana alert struct mail destination requeied to tag")
 	}
-	cc, exist := v.Tags["Cc"]
+	cc, exist := v.Tags["cc"]
 	if exist {
 		s.Cc = util.StringsToArray(cc)
 	}
 	return s, nil
 }
 
-func (v *StGrafanaAlert) ToTeams() (*StNotifyTeams, error) {
-	s := new(StNotifyTeams)
+func (v *GrafanaAlert) ToTeams() (*NotifyTeams, error) {
+	s := new(NotifyTeams)
 	s.Title = v.Title
 	s.Content.Text = v.Message
-	to, exist := v.Tags["Touri"]
+	to, exist := v.Tags["to"]
 	if exist {
-		s.Touri = to
+		s.To = util.StringsToArray(to)
 	} else {
 		return nil, errors.New("to tag not found in grafana alert struct teams destination requeied to tag")
 	}

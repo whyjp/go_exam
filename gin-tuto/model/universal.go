@@ -2,39 +2,42 @@ package model
 
 import "webzen.com/notifyhandler/util"
 
-type stUniversalProducer struct {
-	Producer string            `json:"producer" binding:"required" example:"wiss or wingo or kiss or more"`
-	From     string            `json:"from" binding:"required" example:""`
-	Title    string            `json:"title" binding:"required" example:""`
-	Content  string            `json:"content" binding:"required" example:""`
-	Tags     map[string]string `json:"tags" example:"game:#MUA2, region:KR"`
+type uuniversalProducer struct {
+	Producer string            `json:"producer" binding:"required" example:"swagger"`
+	From     string            `json:"from" binding:"required" example:"swagger webapp"`
+	Title    string            `json:"title" binding:"required" example:"swagger webapp test send notify"`
+	Content  string            `json:"content" binding:"required" example:"swagger webapp test send notify\nhi\nhello\ngoodbye\nim swagger notify handler"`
+	Tags     map[string]string `json:"tags" example:"game:MUA2, region:KR"`
+	ImageURL string            `json:"image_url,omitempty" example:"http://internal.image.url/imgname.jpg"`
 }
 
-type StUniversalProducerEMail struct {
-	stUniversalProducer
-	To string `json:"to" binding:"required" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
-	Cc string `json:"cc,omitempty" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
+type UniversalProducerEMail struct {
+	uuniversalProducer
+	To  string `json:"to" binding:"required" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
+	Cc  string `json:"cc,omitempty" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
+	Bcc string `json:"bcc,omitempty" example:"xxx@yyyy.com;yyy@xxxx.co.kr"`
 }
-type StUniversalProducerTeams struct {
-	stUniversalProducer
-	Touri string `json:"touri" binding:"required" example:"http://xxx.x.xx.xxx.x."`
+type UniversalProducerTeams struct {
+	uuniversalProducer
+	Touri string `json:"touri" binding:"required" example:"http://xxx.x.xx.xxx.x;http://xxx.x.xx.xxx.x"`
 }
 
-func (v *StUniversalProducerEMail) ToEMail() (*StNotifyEMail, error) {
-	s := new(StNotifyEMail)
+func (v *UniversalProducerEMail) ToEMail() (*NotifyEMail, error) {
+	s := new(NotifyEMail)
 	s.Title = v.Title
 	s.Content.Text = v.Content
 	s.From = v.From
 	s.To = util.StringsToArray(v.To)
 	s.Cc = util.StringsToArray(v.Cc)
+	s.Bcc = util.StringsToArray(v.Bcc)
 	return s, nil
 }
 
-func (v *StUniversalProducerTeams) ToTeams() (*StNotifyTeams, error) {
-	s := new(StNotifyTeams)
+func (v *UniversalProducerTeams) ToTeams() (*NotifyTeams, error) {
+	s := new(NotifyTeams)
 	s.Title = v.Title
 	s.Content.Text = v.Content
 	s.From = v.From
-	s.Touri = v.Touri
+	s.To = util.StringsToArray(v.Touri)
 	return s, nil
 }
