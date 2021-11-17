@@ -8,14 +8,14 @@ import (
 	"webzen.com/notifyhandler/model"
 )
 
-type EMaillCenter interface {
+type EMaillConvertable interface {
 	ToEMail() (*model.NotifyEMail, error)
 }
-type TeamsCenter interface {
+type TeamsConvertable interface {
 	ToTeams() (*model.NotifyTeams, error)
 }
 
-func EMail(s EMaillCenter) map[string]interface{} {
+func EMail(s EMaillConvertable) map[string]interface{} {
 	var resultSet = make(map[string]interface{})
 
 	jsonEMail, err := s.ToEMail()
@@ -36,7 +36,7 @@ func EMail(s EMaillCenter) map[string]interface{} {
 	}
 	return resultSet
 }
-func Teams(s TeamsCenter) map[string]interface{} {
+func Teams(s TeamsConvertable) map[string]interface{} {
 	var resultSet = make(map[string]interface{})
 
 	jsonTeams, err := s.ToTeams()
