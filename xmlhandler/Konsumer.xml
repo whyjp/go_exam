@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <!-- 
   message_queue : Write 할 Queue Name, 마지막 문자에 message_queue_workers 에서 설정한 값만큼 루프를 돌며 Queue 에 접근 
@@ -14,34 +13,30 @@
   offset_autocommit : offset auto commit 유무 (true | false)
   order_secure : msmq 저장시 message 순서 보장
   -->
-
   <application>
-    <param name="service_name" value="__Log_Consumer"/>
-    <param name="service_desc" value="__Log_Consumer"/>
-	<param name="message_queue" value=".\PRIVATE$\_-p_"/>
-	<param name="message_queue_workers" value="4"/>
-	<param name="message_lable" value="logs"/>
-	<param name="consumer_workers" value="1"/>
-	<param name="workers_multiple" value="2"/>
-	<param name="offset_topic" value="OFFSET_BEGINNING"/>
-	<param name="offset_autocommit" value="false"/>
-	<param name="order_secure" value="false"/>
-
+    <param name="service_name" value="__Log_Consumer"></param>
+    <param name="service_desc" value="__Log_Consumer"></param>
+    <param name="message_queue" value=".\PRIVATE$\_-p_"></param>
+    <param name="message_queue_workers" value="4"></param>
+    <param name="message_lable" value="logs"></param>
+    <param name="consumer_workers" value="1"></param>
+    <param name="workers_multiple" value="2"></param>
+    <param name="offset_topic" value="OFFSET_BEGINNING"></param>
+    <param name="offset_autocommit" value="false"></param>
+    <param name="order_secure" value="false"></param>
   </application>
-  
   <repository>
-	<param name="broker" value="k1_ata.outer.9_a.com:9092"/>
-    <param name="topic" value="transport__rydts"/>
-    <param name="group_id" value="us_r06"/>
-    <param name="security_protocol" value="SASL_PLAINTEXT"/>
-    <param name="sasl_mechanisms" value="PLAIN"/>
-    <param name="sasl_username" value="us_06"/>
-    <param name="sasl_password" value="U6_xcw71k0v48"/>
+    <param name="broker" value="k1_ata.outer.9_a.com:9092"></param>
+    <param name="topic" value="totopic"></param>
+    <param name="group_id" value="us_r06"></param>
+    <param name="security_protocol" value="SASL_PLAINTEXT"></param>
+    <param name="sasl_mechanisms" value="PLAIN"></param>
+    <param name="sasl_username" value="us_06"></param>
+    <param name="sasl_password" value="U6_xcw71k0v48"></param>
   </repository>
-  
   <log>
-    <appender name="file_appender">	
-	<!--
+    <appender name="file_appender">
+      <!--
 	<appender name="file_appender"> : 파일 로깅 설정 (log4cxx)
 	enable : 로깅 사용 여부 (true | false)
 	file_path : 로깅 파일 위치. 상대경로 사용시 .exe 위치 기준
@@ -49,26 +44,24 @@
 	conversion_pattern : 로깅 형식
 	level : 로깅 레벨 (ALL < DEBUG < INFO < WARN < ERROR < FATAL)
 	-->
-      <param name="enable" value="true"/>
-      <param name="file_path" value="./log/KOR__Log_Consumer.log"/>
-      <param name="file_name_pattern" value=".yyyy-MM-dd"/>
-      <param name="conversion_pattern" value="%d{yyyyMMdd HH:mm:ss.SSS}[%t][%p][%x]%m%n"/>
-      <param name="level" value="DEBUG"/>
+      <param name="enable" value="true"></param>
+      <param name="file_path" value="./log/KOR__Log_Consumer.log"></param>
+      <param name="file_name_pattern" value=".yyyy-MM-dd"></param>
+      <param name="conversion_pattern" value="%d{yyyyMMdd HH:mm:ss.SSS}[%t][%p][%x]%m%n"></param>
+      <param name="level" value="DEBUG"></param>
     </appender>
-	
     <appender name="db_appender">
-	<!--
+      <!--
 	<appender name="db_appender"> : db 로깅(log4cxx)
 	enable : 로깅 사용 여부 (true | false)
 	url : db 연결 connection string
 	conversion_pattern : 로깅 형식
 	level : 로깅 레벨 (ALL < DEBUG < INFO < WARN < ERROR < FATAL)
 	-->
-      <param name="enable" value="false"/>
-      <param name="url" value="DRIVER={SQL Server};SERVER=1_.5,6279;DATABASE=IP_SAP;UID=sap_ser_mw;PWD=Qf|_ve:vn4se?kxs;"/>
-      <param name="conversion_pattern" value="INSERT INTO TblDBLog(STID, DateTime, Level, Message) VALUES(%x, '%d{yyyyMMdd HH:mm:ss.SSS}', '%p', '%m')"/>
-      <param name="level" value="DEBUG"/>
+      <param name="enable" value="false"></param>
+      <param name="url" value="DRIVER={SQL Server};SERVER=1_.5,6279;DATABASE=IP_SAP;UID=sap_ser_mw;PWD=Qf|_ve:vn4se?kxs;"></param>
+      <param name="conversion_pattern" value="INSERT INTO TblDBLog(STID, DateTime, Level, Message) VALUES(%x, &#39;%d{yyyyMMdd HH:mm:ss.SSS}&#39;, &#39;%p&#39;, &#39;%m&#39;)"></param>
+      <param name="level" value="DEBUG"></param>
     </appender>
   </log>
-</configuration>
-
+</configuration>n>

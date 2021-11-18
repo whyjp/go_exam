@@ -1,3 +1,3 @@
-module wz/xmlhandler
+module wz/topicmodify
 
 go 1.17
