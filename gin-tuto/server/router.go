@@ -4,6 +4,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 	"runtime"
 
 	"github.com/gin-contrib/gzip"
@@ -32,7 +33,12 @@ import (
 // @BasePath
 func NewRouter(config *viper.Viper) *gin.Engine {
 	logName := config.GetString("server.log")
-	fileLog, err := os.OpenFile(logName, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+	fileLog, err := os.OpenFile(exPath+"/"+logName, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 
 	if err != nil {
 		log.Fatal(err)
