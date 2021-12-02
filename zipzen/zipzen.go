@@ -88,7 +88,12 @@ var logger *log.Logger
 func main() {
 	//initlogger
 	binName := "zipzen"
-	fpLog, err := os.OpenFile(binName+".log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+	fpLog, err := os.OpenFile(exPath+"/"+binName+".log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		panic(err)
 	}
