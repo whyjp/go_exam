@@ -1,0 +1,16 @@
+[kafka]
+brokers = "localhost:9092"#"10.10.46.233:9093"#
+topics = "nxlog_dev_topic_1mb_l"#"cpp_test_sample_loss" #"cpp_test_sample_duplicate" #"nxlog_dev_topic"#"nxlog_dev_topic3"#
+group = "test2"
+autocommit = false
+
+[app]
+logfile = "fastdataconsumer.log"
+stdout = false
+consumeouttofile = true
+resulttofile = true
+checktypeseqno = true
+checklosslist = true
+checkduplicatelist = false
+typeresult_onlysensitive = true
+checklist_asstring = true
